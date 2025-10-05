@@ -1,0 +1,1218 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>PyTorch Tensor Objects Attributes and Methods &#8212; Genny&#39;s Jupyter Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures/lecture3';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Main Types of Deep Learning Neural Networks" href="lecture4.html" />
+    <link rel="prev" title="Laboratory Task 4" href="../laboratories/Laboratory4.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/bee-eyebrows.gif" class="logo__image only-light" alt="Genny's Jupyter Book - Home"/>
+    <script>document.write(`<img src="../_static/bee-eyebrows.gif" class="logo__image only-dark" alt="Genny's Jupyter Book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Hi there!
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="lecture1.html">Lesson 1: Foundational Concept of Deep Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../lecturetasks/lecturetask1.html">Lecture Task 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../laboratories/Laboratory1.html">Laboratory Task 1</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="lecture2.html">Lesson 2: Understanding Deep Learnin</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../laboratories/Laboratory2.html">Laboratory Task 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../laboratories/Laboratory3.html">Laboratory Task 3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../laboratories/Laboratory4.html">Laboratory Task 4</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">PyTorch Tensor Objects Attributes and Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lecture4.html">Main Types of Deep Learning Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lecture5.html">Lesson 3: Applications of Deep Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lecture6.html">CNN Implementation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/gnhl-code/DeepLearning" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/gnhl-code/DeepLearning/issues/new?title=Issue%20on%20page%20%2Flectures/lecture3.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/lectures/lecture3.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>PyTorch Tensor Objects Attributes and Methods</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-numpy-arrays-to-pytorch-tensors"><strong>1. Converting NumPy arrays to PyTorch tensors</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tensor-datatypes"><strong>Tensor Datatypes</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-tensors-from-scratch"><strong>2. Creating tensors from scratch</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indexing-and-slicing"><strong>3. Indexing and Slicing</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reshape-tensors-with-view"><strong>4. Reshape tensors with .view()</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tensor-arithmetic"><strong>5. Tensor Arithmetic</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-tensor-operations">Basic Tensor Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arithmetic-operations">Arithmetic Operations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#monomial-operations">Monomial Operations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-statistics">Summary Statistics</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dot-products"><strong>6. Dot Products</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-multiplication"><strong>7. Matrix Multiplication</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-multiplication-with-broadcasting">Matrix multiplication with broadcasting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-operations"><strong>8. Additional Operations</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#laboratory-task-5">Laboratory Task 5</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="pytorch-tensor-objects-attributes-and-methods">
+<h1>PyTorch Tensor Objects Attributes and Methods<a class="headerlink" href="#pytorch-tensor-objects-attributes-and-methods" title="Link to this heading">#</a></h1>
+<p>This will cover the following operations of a tensor object:</p>
+<ul class="simple">
+<li><p>Converting NumPy arrays to PyTorch tensors</p></li>
+<li><p>Creating tensors from scratch</p></li>
+<li><p>Indexing and slicing</p></li>
+<li><p>Reshaping tensors (tensor views)</p></li>
+<li><p>Tensor arithmetic and basic operations</p></li>
+<li><p>Dot products</p></li>
+<li><p>Matrix multiplication</p></li>
+<li><p>Additional, more advanced operations</p></li>
+</ul>
+<p><img alt="tensor" src="../_images/tensor.png" /></p>
+<p>In PyTorch, we use tensors to encode the inputs and outputs of a model, as well as the model’s parameters. Tensors are similar to NumPy’s ndarrays, <strong>except that tensors can run on GPUs or other specialized hardware to accelerate computing.</strong></p>
+<section id="converting-numpy-arrays-to-pytorch-tensors">
+<h2><strong>1. Converting NumPy arrays to PyTorch tensors</strong><a class="headerlink" href="#converting-numpy-arrays-to-pytorch-tensors" title="Link to this heading">#</a></h2>
+<p>A torch.Tensor is a multi-dimensional matrix containing elements of a single data type. Calculations between tensors can only happen if the tensors share the same dtype. In some cases tensors are used as a replacement for NumPy to use the power of GPUs (more on this later). Let’s try to initialize a numpy array first!</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span> 
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span> 
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span> 
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">arr</span><span class="p">))</span> 
+</pre></div>
+</div>
+<p>[1. 2. 3. 4. 5.] float64</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="c1"># Equivalent to x = torch.as_tenso(arr) </span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> 
+</pre></div>
+</div>
+<p>tensor([1., 2., 3., 4., 5.], dtype=torch.float64)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print the datatype </span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span> 
+</pre></div>
+</div>
+<p>torch.float64</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print the tensor object type </span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">type</span><span class="p">())</span> <span class="c1"># this is more specific! </span>
+</pre></div>
+</div>
+<p>torch.DoubleTensor</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">arr2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mf">12.</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">arr2</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">arr2</span><span class="p">))</span> 
+</pre></div>
+</div>
+<p>[[ 0. 1. 2.] [ 3. 4. 5.] [ 6. 7. 8.] [ 9. 10. 11.]]</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x2</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">arr2</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">x2</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">x2</span><span class="o">.</span><span class="n">type</span><span class="p">())</span> 
+</pre></div>
+</div>
+<p>tensor([[ 0., 1., 2.], [ 3., 4., 5.], [ 6., 7., 8.], [ 9., 10., 11.]], dtype=torch.float64) torch.DoubleTensor</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span> <span class="c1"># Create matrix using array comprehension </span>
+<span class="n">mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(),</span> <span class="mi">3</span><span class="p">)</span> 
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cols</span><span class="p">)]</span> 
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rows</span><span class="p">)])</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">mat</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">mat</span><span class="p">))</span> 
+<span class="n">xmat</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">mat</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">xmat</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">xmat</span><span class="p">))</span> 
+</pre></div>
+</div>
+<p>[[0.635 0.305 0.433 0.088 0.728]
+[0.261 0.629 0.377 0.029 0.192]
+[0.279 0.234 0.922 0.404 0.794]
+[0.645 0.888 0.575 0.37 0.645]
+[0.441 0.149 0.767 0.1 0.792]]</p>
+<p>tensor([[0.6350, 0.3050, 0.4330, 0.0880, 0.7280],
+[0.2610, 0.6290, 0.3770, 0.0290, 0.1920],
+[0.2790, 0.2340, 0.9220, 0.4040, 0.7940],
+[0.6450, 0.8880, 0.5750, 0.3700, 0.6450],
+[0.4410, 0.1490, 0.7670, 0.1000, 0.7920]], dtype=torch.float64)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Check</span> <span class="k">if</span> <span class="n">an</span> <span class="nb">object</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">tensor</span> <span class="n">torch</span><span class="o">.</span><span class="n">is_tensor</span><span class="p">(</span><span class="n">mat</span><span class="p">)</span> 
+</pre></div>
+</div>
+<p>False</p>
+</section>
+<section id="tensor-datatypes">
+<h2><strong>Tensor Datatypes</strong><a class="headerlink" href="#tensor-datatypes" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>TYPE</p></th>
+<th class="head"><p>NAME</p></th>
+<th class="head"><p>EQUIVALENT</p></th>
+<th class="head"><p>TENSOR TYPE</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>32-bit integer (signed)</p></td>
+<td><p>torch.int32</p></td>
+<td><p>torch.int</p></td>
+<td><p>IntTensor</p></td>
+</tr>
+<tr class="row-odd"><td><p>64-bit integer (signed)</p></td>
+<td><p>torch.int64</p></td>
+<td><p>torch.long</p></td>
+<td><p>LongTensor</p></td>
+</tr>
+<tr class="row-even"><td><p>16-bit integer (signed)</p></td>
+<td><p>torch.int16</p></td>
+<td><p>torch.short</p></td>
+<td><p>ShortTensor</p></td>
+</tr>
+<tr class="row-odd"><td><p>32-bit floating point</p></td>
+<td><p>torch.float32</p></td>
+<td><p>torch.float</p></td>
+<td><p>FloatTensor</p></td>
+</tr>
+<tr class="row-even"><td><p>64-bit floating point</p></td>
+<td><p>torch.float64</p></td>
+<td><p>torch.double</p></td>
+<td><p>DoubleTensor</p></td>
+</tr>
+<tr class="row-odd"><td><p>16-bit floating point</p></td>
+<td><p>torch.float16</p></td>
+<td><p>torch.half</p></td>
+<td><p>HalfTensor</p></td>
+</tr>
+<tr class="row-even"><td><p>8-bit integer (signed)</p></td>
+<td><p>torch.int8</p></td>
+<td><p></p></td>
+<td><p>CharTensor</p></td>
+</tr>
+<tr class="row-odd"><td><p>8-bit integer (unsigned)</p></td>
+<td><p>torch.uint8</p></td>
+<td><p></p></td>
+<td><p>ByteTensor</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">xmat</span><span class="o">.</span><span class="n">type</span><span class="p">()</span> 
+</pre></div>
+</div>
+<p>‘torch.DoubleTensor’</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">z</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">())</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int64&#39;</span><span class="p">))</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> 
+<span class="n">z</span><span class="o">.</span><span class="n">type</span><span class="p">()</span> 
+</pre></div>
+</div>
+<p>tensor(0) ‘torch.LongTensor’ <a class="reference external" href="https://pytorch.org/docs/stable/torch.html#torch.from_numpy"><strong>torch.from_numpy()</strong></a><br />
+<a class="reference external" href="https://pytorch.org/docs/stable/torch.html#torch.as_tensor"><strong>torch.as_tensor()</strong></a><br />
+<a class="reference external" href="https://pytorch.org/docs/stable/torch.html#torch.tensor"><strong>torch.tensor()</strong></a></p>
+<p>There are a number of different functions available for <a class="reference external" href="https://pytorch.org/docs/stable/torch.html#creation-ops">creating tensors</a>. When using <a class="reference external" href="https://pytorch.org/docs/stable/torch.html#torch.from_numpy"><strong>torch.from_numpy()</strong></a> and <a class="reference external" href="https://pytorch.org/docs/stable/torch.html#torch.as_tensor"><strong>torch.as_tensor()</strong></a>, the PyTorch tensor and the source NumPy array share the same memory. This means that changes to one affect the other. However, the <a class="reference external" href="https://pytorch.org/docs/stable/torch.html#torch.tensor"><strong>torch.tensor()</strong></a> function always makes a copy.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Using torch.from_numpy() </span>
+<span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span> 
+<span class="n">t</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="err">```</span>
+
+<span class="n">tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span> 
+
+<span class="err">```</span><span class="n">python</span> 
+<span class="n">arr</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">77</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> 
+</pre></div>
+</div>
+<p>tensor([ 0, 1, 77, 3, 4], dtype=torch.int32)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Using torch.tensor() </span>
+<span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span> 
+<span class="n">t</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> 
+</pre></div>
+</div>
+<p>tensor([0, 1, 2, 3, 4], dtype=torch.int32)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">arr</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">77</span> <span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> 
+</pre></div>
+</div>
+<p>tensor([0, 1, 2, 3, 4], dtype=torch.int32)</p>
+</section>
+<section id="creating-tensors-from-scratch">
+<h2><strong>2. Creating tensors from scratch</strong><a class="headerlink" href="#creating-tensors-from-scratch" title="Link to this heading">#</a></h2>
+<p><strong>Uninitialized tensors with</strong> .empty()<br />
+<a class="reference external" href="https://pytorch.org/docs/stable/torch.html#torch.empty"><strong>torch.empty()</strong></a> returns an <em>uninitialized</em> tensor. Essentially a block of memory is allocated according to the size of the tensor, and any values already sitting in the block are returned. This is similar to the behavior of numpy.empty().</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> 
+</pre></div>
+</div>
+<p>tensor([[0., 0., 0.],
+[0., 0., 0.],
+[0., 0., 0.],
+[0., 0., 0.]])</p>
+<p><strong>Initialized tensors with .zeros() and .ones()</strong></p>
+<p><a class="reference external" href="https://pytorch.org/docs/stable/torch.html#torch.zeros"><strong>torch.zeros(size)</strong></a><br />
+<a class="reference external" href="https://pytorch.org/docs/stable/torch.html#torch.ones"><strong>torch.ones(size)</strong></a></p>
+<p>It’s a good idea to pass in the intended dtype.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> 
+</pre></div>
+</div>
+<p>tensor([[0, 0, 0],
+[0, 0, 0],
+[0, 0, 0],
+[0, 0, 0]])</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>tensor([[1., 1., 1., 1.],
+[1., 1., 1., 1.],
+[1., 1., 1., 1.],
+[1., 1., 1., 1.]])</p>
+<p><strong>Tensors from ranges</strong></p>
+<p><a class="reference external" href="https://pytorch.org/docs/stable/torch.html#torch.arange"><strong>torch.arange(start,end,step)</strong></a><br />
+<a class="reference external" href="https://pytorch.org/docs/stable/torch.html#torch.linspace"><strong>torch.linspace(start,end,steps)</strong></a></p>
+<p>Note that with .arange(), end is exclusive, while with linspace(), end is inclusive.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">18</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> 
+</pre></div>
+</div>
+<p>tensor([[ 0, 2, 4], [ 6, 8, 10], [12, 14, 16]])</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">18</span><span class="p">,</span><span class="mi">12</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> 
+</pre></div>
+</div>
+<p>tensor([[ 0.0000, 1.6364, 3.2727, 4.9091],
+[ 6.5455, 8.1818, 9.8182, 11.4545],
+[13.0909, 14.7273, 16.3636, 18.0000]])</p>
+<p><strong>Tensors from data</strong></p>
+<p>torch.tensor() will choose the dtype based on incoming data:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">type</span><span class="p">())</span> 
+
+<span class="c1">#changing datatypes </span>
+<span class="n">x</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span> 
+</pre></div>
+</div>
+<p>tensor([1, 2, 3, 4]) torch.int64 torch.LongTensor tensor([1, 2, 3, 4], dtype=torch.int32)</p>
+<p>You can also pass the dtype in as an argument. For a list of dtypes visit <a class="reference external" href="https://pytorch.org/docs/stable/tensor_attributes.html#torch.torch.dtype">https://pytorch.org/docs/stable/tensor _attributes.html#torch.torch.dtype</a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">int</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">type</span><span class="p">())</span> 
+</pre></div>
+</div>
+<p>tensor([ 8, 9, -3], dtype=torch.int32) torch.int32 torch.IntTensor</p>
+<p><strong>Changing the dtype of existing tensors</strong></p>
+<p>Don’t be tempted to use x = torch.tensor(x, dtype=torch.type) as it will raise an error about improper use of tensor cloning.<br />
+Instead, use the tensor .type() method.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Old:&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">type</span><span class="p">())</span> 
+<span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;New:&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">type</span><span class="p">())</span>   
+</pre></div>
+</div>
+<p>Old: torch.IntTensor
+New: torch.LongTensor</p>
+<p><strong>Random number tensor</strong></p>
+<p><a class="reference external" href="https://pytorch.org/docs/stable/torch.html#torch.rand"><strong>torch.rand(size)</strong></a> returns random samples from a uniform distribution over [0, 1]
+<a class="reference external" href="https://pytorch.org/docs/stable/torch.html#torch.randn"><strong>torch.randn(size)</strong></a> returns samples from the “standard normal” distribution [σ = 1]<br />
+    Unlike rand which is uniform, values closer to zero are more likely to appear.<br />
+<a class="reference external" href="https://pytorch.org/docs/stable/torch.html#torch.randint"><strong>torch.randint(low,high,size)</strong></a> returns random integers from low (inclusive) to high (exclusive)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> 
+</pre></div>
+</div>
+<p>tensor([[0.6671, 0.7989, 0.0904], [0.1503, 0.0468, 0.1173], [0.9687, 0.8473, 0.4124], [0.8930, 0.2437, 0.3226]])</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> 
+</pre></div>
+</div>
+<p>tensor([[ 0.5368, -0.0475, 0.7608], [-0.1866, 0.6753, -0.8869], [ 1.0618, -2.0881, 0.0266], [ 1.2814, -1.7819, -0.6486]])</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> 
+</pre></div>
+</div>
+<p>tensor([[2, 3, 4], [0, 1, 0], [1, 2, 3], [4, 0, 0]])</p>
+<p><strong>Random number tensors that follow the input size</strong></p>
+<p><a class="reference external" href="https://pytorch.org/docs/stable/torch.html#torch.rand_like"><strong>torch.rand_like(input)</strong></a><br />
+<a class="reference external" href="https://pytorch.org/docs/stable/torch.html#torch.randn_like"><strong>torch.randn_like(input)</strong></a><br />
+<a class="reference external" href="https://pytorch.org/docs/stable/torch.html#torch.randint_like"><strong>torch.randint_like(input,low,high)</strong></a><br />
+these return random number tensors with the same size as input</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> 
+</pre></div>
+</div>
+<p>tensor([[0., 0., 0., 0., 0.], [0., 0., 0., 0., 0.]])</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x2</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="nb">print</span><span class="p">(</span><span class="n">x2</span><span class="p">)</span> 
+</pre></div>
+</div>
+<p>tensor([[-0.0275, -1.5322, -1.0815, 0.0945, 0.3136],
+[ 0.5034, -0.4533, -0.6120, 0.2258, -0.4032]])</p>
+<p>The same syntax can be used with<br />
+<a class="reference external" href="https://pytorch.org/docs/stable/torch.html#torch.zeros_like"><strong>torch.zeros_like(input)</strong></a><br />
+<a class="reference external" href="https://pytorch.org/docs/stable/torch.html#torch.ones_like"><strong>torch.ones_like(input)</strong></a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x3</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">x2</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">x3</span><span class="p">)</span> 
+</pre></div>
+</div>
+<p>tensor([[1., 1., 1., 1., 1.],
+[1., 1., 1., 1., 1.]])</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x4</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x3</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">x4</span><span class="p">)</span> 
+</pre></div>
+</div>
+<p>tensor([[0., 0., 0., 0., 0.], [0., 0., 0., 0., 0.]])</p>
+<p><strong>Setting the random seed</strong>
+<a class="reference external" href="https://pytorch.org/docs/stable/torch.html#torch.manual_seed"><strong>torch.manual_seed(int)</strong></a> is used to obtain reproducible results</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span> 
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> 
+</pre></div>
+</div>
+<p>tensor([[0.8823, 0.9150, 0.3829], [0.9593, 0.3904, 0.6009]])</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span> 
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> 
+</pre></div>
+</div>
+<p>tensor([[0.8823, 0.9150, 0.3829], [0.9593, 0.3904, 0.6009]])</p>
+<p><strong>Tensor attributes</strong></p>
+<p>Besides dtype, we can look at other <a class="reference external" href="https://pytorch.org/docs/stable/tensor_attributes.html">tensor attributes</a> like shape, device and layout.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">.</span><span class="n">shape</span> 
+</pre></div>
+</div>
+<p>torch.Size([2, 3])</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">()</span> <span class="c1"># equivalent to x.shape </span>
+</pre></div>
+</div>
+<p>torch.Size([2, 3])</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">.</span><span class="n">device</span> 
+</pre></div>
+</div>
+<p>device(type=’cpu’)</p>
+<p>PyTorch supports use of multiple <a class="reference external" href="https://pytorch.org/docs/stable/tensor_attributes.html#torch-device">devices</a>, harnessing the power of one or more GPUs in addition to the CPU. We won’t explore that here, but you should know that operations between tensors can only happen for tensors installed on the same device.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">.</span><span class="n">layout</span> 
+</pre></div>
+</div>
+<p>torch.strided</p>
+<p>PyTorch has a class to hold the <a class="reference external" href="https://pytorch.org/docs/stable/tensor_attributes.html#torch.torch.layout">memory layout</a> option. The default setting of <a class="reference external" href="https://en.wikipedia.org/wiki/Stride_of_an_array">strided</a> will suit our purposes throughout the course.</p>
+</section>
+<section id="indexing-and-slicing">
+<h2><strong>3. Indexing and Slicing</strong><a class="headerlink" href="#indexing-and-slicing" title="Link to this heading">#</a></h2>
+<p>Extracting specific values from a tensor works just the same as with NumPy arrays.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> 
+</pre></div>
+</div>
+<p>tensor([[0, 1], [2, 3], [4, 5]])</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Grabbing the right hand column values </span>
+<span class="n">x</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>tensor([1, 3, 5])</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Grabbing the right hand column as a (3,1) slice </span>
+<span class="n">x</span><span class="p">[:,</span><span class="mi">1</span><span class="p">:]</span> 
+</pre></div>
+</div>
+<p>tensor([[1], [3], [5]])</p>
+</section>
+<section id="reshape-tensors-with-view">
+<h2><strong>4. Reshape tensors with .view()</strong><a class="headerlink" href="#reshape-tensors-with-view" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://pytorch.org/docs/master/tensors.html#torch.Tensor.view"><strong>view()</strong></a> and <a class="reference external" href="https://pytorch.org/docs/master/torch.html#torch.reshape"><strong>reshape()</strong></a> do essentially the same thing by returning a reshaped tensor without changing the original tensor in place.<br />
+There’s a good discussion of the differences <a class="reference external" href="https://stackoverflow.com/questions/49643225/whats-the-difference-between-reshape-and-view-in-pytorch">here</a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> 
+</pre></div>
+</div>
+<p>tensor([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span> <span class="n">y</span> 
+</pre></div>
+</div>
+<p>tensor([[5, 1, 2, 3, 4], [5, 6, 7, 8, 9]])</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># x is changed by changing y, which shares the data... x </span>
+</pre></div>
+</div>
+<p>tensor([5, 1, 2, 3, 4, 5, 6, 7, 8, 9])</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">99</span> 
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> 
+</pre></div>
+</div>
+<p>tensor([99, 1, 2, 3, 4, 5, 6, 7, 8, 9])</p>
+<p><strong>Adopt another tensors shape with.view_as()</strong></p>
+<p><a class="reference external" href="https://pytorch.org/docs/master/tensors.html#torch.Tensor.view_as"><strong>view_as(input)</strong></a> only works with tensors that have the same number of elements.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">z</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="n">x</span><span class="o">.</span><span class="n">view_as</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> 
+</pre></div>
+</div>
+<p>tensor([[99, 1], [ 2, 3], [ 4, 5], [ 6, 7], [ 8, 9]])</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">z</span> 
+</pre></div>
+</div>
+<p>tensor([[1., 1.], [1., 1.], [1., 1.], [1., 1.], [1., 1.]])</p>
+</section>
+<section id="tensor-arithmetic">
+<h2><strong>5. Tensor Arithmetic</strong><a class="headerlink" href="#tensor-arithmetic" title="Link to this heading">#</a></h2>
+<p>Adding tensors can be performed a few different ways depending on the desired result.<br />
+As a simple expression:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">)</span> 
+<span class="n">b</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span> 
+</pre></div>
+</div>
+<p>tensor([5., 7., 9.])</p>
+<p>As arguments passed into a torch operation:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span> 
+</pre></div>
+</div>
+<p>tensor([5., 7., 9.])</p>
+<p>With an output tensor passed in as an argument:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> 
+<span class="n">torch</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">result</span><span class="p">)</span> 
+
+<span class="c1"># equivalent to </span>
+<span class="n">result</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> 
+</pre></div>
+</div>
+<p>tensor([5., 7., 9.])</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">.</span><span class="n">add_</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> 
+
+<span class="c1"># equivalent to </span>
+<span class="n">a</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>tensor([5., 7., 9.])</p>
+<p><strong>NOTE:</strong> Any operation that changes a tensor in-place is post-fixed with an underscore <em>.<br />
+In the above example: a.add</em>(b) changed a.</p>
+</section>
+<section id="basic-tensor-operations">
+<h2>Basic Tensor Operations<a class="headerlink" href="#basic-tensor-operations" title="Link to this heading">#</a></h2>
+<section id="arithmetic-operations">
+<h3>Arithmetic Operations<a class="headerlink" href="#arithmetic-operations" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operation</p></th>
+<th class="head"><p>Function</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>a + b</p></td>
+<td><p>a.add(b)</p></td>
+<td><p>element-wise addition</p></td>
+</tr>
+<tr class="row-odd"><td><p>a - b</p></td>
+<td><p>a.sub(b)</p></td>
+<td><p>subtraction</p></td>
+</tr>
+<tr class="row-even"><td><p>a * b</p></td>
+<td><p>a.mul(b)</p></td>
+<td><p>multiplication</p></td>
+</tr>
+<tr class="row-odd"><td><p>a / b</p></td>
+<td><p>a.div(b)</p></td>
+<td><p>division</p></td>
+</tr>
+<tr class="row-even"><td><p>a % b</p></td>
+<td><p>a.fmod(b)</p></td>
+<td><p>modulo (remainder after division)</p></td>
+</tr>
+<tr class="row-odd"><td><p>a^b</p></td>
+<td><p>a.pow(b)</p></td>
+<td><p>power</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="monomial-operations">
+<h3>Monomial Operations<a class="headerlink" href="#monomial-operations" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operation</p></th>
+<th class="head"><p>Function</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p></p></td>
+<td><p>a</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>1/a</p></td>
+<td><p>torch.reciprocal(a)</p></td>
+<td><p>reciprocal</p></td>
+</tr>
+<tr class="row-even"><td><p>√a</p></td>
+<td><p>torch.sqrt(a)</p></td>
+<td><p>square root</p></td>
+</tr>
+<tr class="row-odd"><td><p>log(a)</p></td>
+<td><p>torch.log(a)</p></td>
+<td><p>natural log</p></td>
+</tr>
+<tr class="row-even"><td><p>e^a</p></td>
+<td><p>torch.exp(a)</p></td>
+<td><p>exponential</p></td>
+</tr>
+<tr class="row-odd"><td><p>12.34 ⇒ 12</p></td>
+<td><p>torch.trunc(a)</p></td>
+<td><p>truncated integer</p></td>
+</tr>
+<tr class="row-even"><td><p>12.34 ⇒ 0.34</p></td>
+<td><p>torch.frac(a)</p></td>
+<td><p>fractional component</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="summary-statistics">
+<h3>Summary Statistics<a class="headerlink" href="#summary-statistics" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operation</p></th>
+<th class="head"><p>Function</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>∑a</p></td>
+<td><p>torch.sum(a)</p></td>
+<td><p>sum</p></td>
+</tr>
+<tr class="row-odd"><td><p>ȧ (mean)</p></td>
+<td><p>torch.mean(a)</p></td>
+<td><p>mean</p></td>
+</tr>
+<tr class="row-even"><td><p>amax</p></td>
+<td><p>torch.max(a)</p></td>
+<td><p>maximum</p></td>
+</tr>
+<tr class="row-odd"><td><p>amin</p></td>
+<td><p>torch.min(a)</p></td>
+<td><p>minimum</p></td>
+</tr>
+<tr class="row-even"><td><p>torch.max(a,b)</p></td>
+<td><p>torch.max(a,b)</p></td>
+<td><p>returns a tensor of size a containing the element-wise max between a and b</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>NOTE:</strong> Most arithmetic operations require float values. Those that do work with integers return integer tensors.<br />
+For example, torch.div(a,b) performs floor division (truncates the decimal) for integer types, and classic division for floats.</p>
+</section>
+</section>
+<section id="dot-products">
+<h2><strong>6. Dot Products</strong><a class="headerlink" href="#dot-products" title="Link to this heading">#</a></h2>
+<p>A <a class="reference external" href="https://en.wikipedia.org/wiki/Dot_product">dot product</a> is the sum of the products of the corresponding entries of two 1D tensors. If the tensors are both vectors, the dot product is given as:</p>
+<p>$$
+\begin{bmatrix} a &amp; b &amp; c \end{bmatrix} \cdot \begin{bmatrix} d &amp; e &amp; f \end{bmatrix} = ad + be + cf
+$$</p>
+<p>If the tensors include a column vector, then the dot product is the sum of the result of the multiplied matrices. For example:</p>
+<p>$$
+\begin{bmatrix} a &amp; b &amp; c \end{bmatrix} \cdot \begin{bmatrix} d \ e \ f \end{bmatrix} = ad + be + cf
+$$</p>
+<p>Dot products can be expressed as <a class="reference external" href="https://pytorch.org/docs/stable/torch.html#torch.dot"><strong>torch.dot(a,b)</strong></a> or a.dot(b) or b.dot(a)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">)</span> 
+<span class="n">b</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">b</span><span class="p">))</span> 
+</pre></div>
+</div>
+<p>tensor(32.)</p>
+<p><strong>NOTE:</strong> There’s a slight difference between torch.dot() and numpy.dot(). While torch.dot() only accepts 1D arguments and returns a dot product, numpy.dot() also accepts 2D arguments and performs matrix multiplication. We show matrix multiplication below.</p>
+</section>
+<section id="matrix-multiplication">
+<h2><strong>7. Matrix Multiplication</strong><a class="headerlink" href="#matrix-multiplication" title="Link to this heading">#</a></h2>
+<p>2D <a class="reference external" href="https://en.wikipedia.org/wiki/Matrix_multiplication">Matrix multiplication</a> is possible when the number of columns in tensor <strong>A</strong> matches the number of rows in tensor <strong>B</strong>. In this case, the product of tensor <strong>A</strong> with size $(x,y)$ and tensor <strong>B</strong> with size $(y,z)$ results in a tensor of size $(x,z)$<br />
+$begin{bmatrix} a &amp; b &amp; c  d &amp; e &amp; f end{bmatrix} ;times; begin{bmatrix} m &amp; n  p &amp; q  r &amp; s end{bmatrix} = begin{bmatrix} (am+bp+cr) &amp; (an+bq+cs)  (dm+ep+fr) &amp; (dn+eq+fs) end{bmatrix}$<br />
+Matrix multiplication can be computed using <a class="reference external" href="https://pytorch.org/docs/stable/torch.html#torch.mm"><strong>torch.mm(a,b)</strong></a> or a.mm(b) or a &#64; b</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">)</span> 
+<span class="n">b</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">],[</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">],[</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;a: &#39;</span><span class="p">,</span><span class="n">a</span><span class="o">.</span><span class="n">size</span><span class="p">())</span> 
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;b: &#39;</span><span class="p">,</span><span class="n">b</span><span class="o">.</span><span class="n">size</span><span class="p">())</span> 
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;a x b: &#39;</span><span class="p">,</span><span class="n">torch</span><span class="o">.</span><span class="n">mm</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">())</span> 
+</pre></div>
+</div>
+<p>a: torch.Size([2, 3])
+b: torch.Size([3, 2])
+a x b: torch.Size([2, 2])</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">mm</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">))</span> 
+</pre></div>
+</div>
+<p>tensor([[56., 62.], [80., 89.]])</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">mm</span><span class="p">(</span><span class="n">b</span><span class="p">))</span> 
+</pre></div>
+</div>
+<p>tensor([[56., 62.], [80., 89.]])</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">@</span> <span class="n">b</span><span class="p">)</span> 
+</pre></div>
+</div>
+<p>tensor([[56., 62.], [80., 89.]])</p>
+</section>
+<section id="matrix-multiplication-with-broadcasting">
+<h2>Matrix multiplication with broadcasting<a class="headerlink" href="#matrix-multiplication-with-broadcasting" title="Link to this heading">#</a></h2>
+<p>Matrix multiplication that involves <a class="reference external" href="https://pytorch.org/docs/stable/notes/broadcasting.html#broadcasting-semantics">broadcasting</a> can be computed using <a class="reference external" href="https://pytorch.org/docs/stable/torch.html#torch.matmul"><strong>torch.matmul(a,b)</strong></a> or <code class="docutils literal notranslate"><span class="pre">a.matmul(b)</span></code> or <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">&#64;</span> <span class="pre">b</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">t1</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> 
+<span class="n">t2</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">())</span> 
+</pre></div>
+</div>
+<p>torch.Size([2, 3, 5])</p>
+<p>However, the same operation raises a <strong>RuntimeError</strong> with torch.mm():</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">mm</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">())</span> 
+<span class="n">t1</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> 
+<span class="n">t1</span> 
+</pre></div>
+</div>
+<p>tensor([[ 0.7596, 0.7343, -0.6708], [ 2.7421, 0.5568, -0.8123]])</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">t2</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> 
+<span class="n">t2</span> 
+</pre></div>
+</div>
+<p>tensor([[ 1.1964], [ 0.8613], [-1.3682]])</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">mm</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>tensor([[2.4590], [4.8718]])</p>
+</section>
+<section id="additional-operations">
+<h2><strong>8. Additional Operations</strong><a class="headerlink" href="#additional-operations" title="Link to this heading">#</a></h2>
+<p><strong>L2 or Euclidean Norm</strong></p>
+<p>See <a class="reference external" href="https://pytorch.org/docs/stable/torch.html#torch.norm"><strong>torch.norm()</strong></a><br />
+  The <a class="reference external" href="https://en.wikipedia.org/wiki/Norm_(mathematics)#Euclidean_norm">Euclidian Norm</a> gives the vector norm of $x$ where $x=(x_1,x_2,…,x_n)$.</p>
+<p>It is calculated as</p>
+<p>${displaystyle left|{boldsymbol {x}}right|<em>{2}:={sqrt {x</em>{1}^{2}+cdots +x_{n}^{2}}}}$</p>
+<p>When applied to a matrix, torch.norm() returns the <a class="reference external" href="https://en.wikipedia.org/wiki/Matrix_norm#Frobenius_norm">Frobenius norm</a> by default.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mf">2.</span><span class="p">,</span><span class="mf">5.</span><span class="p">,</span><span class="mf">8.</span><span class="p">,</span><span class="mf">14.</span><span class="p">])</span> 
+<span class="n">x</span><span class="o">.</span><span class="n">norm</span><span class="p">()</span> 
+</pre></div>
+</div>
+<p>tensor(17.)</p>
+<p><strong>Number of Elements</strong></p>
+<p>See <a class="reference external" href="https://pytorch.org/docs/stable/torch.html#torch.numel"><strong>torch.numel()</strong></a><br />
+  Returns the number of elements in a tensor.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span> 
+<span class="n">x</span><span class="o">.</span><span class="n">numel</span><span class="p">()</span> 
+</pre></div>
+</div>
+<p>21</p>
+</section>
+<section id="laboratory-task-5">
+<h2>Laboratory Task 5<a class="headerlink" href="#laboratory-task-5" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Perform Standard Imports</p></li>
+<li><p>Create a function called <code class="docutils literal notranslate"><span class="pre">set_seed()</span></code> that accepts <code class="docutils literal notranslate"><span class="pre">seed:</span> <span class="pre">int</span></code> as a parameter, this function must return nothing but just set the seed to a certain value</p></li>
+<li><p>Create a NumPy array called “arr” that contains 6 random integers between 0 (inclusive) and 5 (exclusive), call the <code class="docutils literal notranslate"><span class="pre">set_seed()</span></code> function and use <code class="docutils literal notranslate"><span class="pre">42</span></code> as the seed parameter.</p></li>
+<li><p>Create a tensor “x” from the array above</p></li>
+<li><p>Change the dtype of x from <code class="docutils literal notranslate"><span class="pre">int32</span></code> to <code class="docutils literal notranslate"><span class="pre">int64</span></code></p></li>
+<li><p>Reshape <code class="docutils literal notranslate"><span class="pre">x</span></code> into a 3x2 tensor<br />
+There are several ways to do this.</p></li>
+<li><p>Return the right-hand column of tensor `x</p></li>
+<li><p>Without changing x, return a tensor of square values of `x<br />
+There are several ways to do this.</p></li>
+<li><p>Create a tensor <code class="docutils literal notranslate"><span class="pre">y</span></code> with the same number of elements as <code class="docutils literal notranslate"><span class="pre">x</span></code>, that can be matrix-multiplied with `x<br />
+Use PyTorch directly (not NumPy) to create a tensor of random integers between 0 (inclusive) and 5 (exclusive). Use 42 as seed.<br />
+Think about what shape it should have to permit matrix multiplication.</p></li>
+<li><p>Find the matrix product of <code class="docutils literal notranslate"><span class="pre">x</span></code> and `y</p></li>
+</ol>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lectures"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../laboratories/Laboratory4.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Laboratory Task 4</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="lecture4.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Main Types of Deep Learning Neural Networks</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-numpy-arrays-to-pytorch-tensors"><strong>1. Converting NumPy arrays to PyTorch tensors</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tensor-datatypes"><strong>Tensor Datatypes</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-tensors-from-scratch"><strong>2. Creating tensors from scratch</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indexing-and-slicing"><strong>3. Indexing and Slicing</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reshape-tensors-with-view"><strong>4. Reshape tensors with .view()</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tensor-arithmetic"><strong>5. Tensor Arithmetic</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-tensor-operations">Basic Tensor Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arithmetic-operations">Arithmetic Operations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#monomial-operations">Monomial Operations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-statistics">Summary Statistics</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dot-products"><strong>6. Dot Products</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-multiplication"><strong>7. Matrix Multiplication</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-multiplication-with-broadcasting">Matrix multiplication with broadcasting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-operations"><strong>8. Additional Operations</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#laboratory-task-5">Laboratory Task 5</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Genheylou Felisilda
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

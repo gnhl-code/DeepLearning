@@ -1,0 +1,23 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+
+parts:
+  - part: "Midterm"
+    chapters:
+      - file: lectures/lecture1
+        sections:
+          - file: lecturetasks/lecturetask1
+          - file: laboratories/Laboratory1
+      - file: lectures/lecture2
+        sections:
+          - file: laboratories/Laboratory2
+          - file: laboratories/Laboratory3
+          - file: laboratories/Laboratory4
+      - file: lectures/lecture3
+      - file: lectures/lecture4
+      - file: lectures/lecture5
+      - file: lectures/lecture6
+ 

@@ -1,0 +1,713 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Lesson 1: Foundational Concept of Deep Learning &#8212; Genny&#39;s Jupyter Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures/lecture1';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Lecture Task 1" href="../lecturetasks/lecturetask1.html" />
+    <link rel="prev" title="Hi there!" href="../intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/bee-eyebrows.gif" class="logo__image only-light" alt="Genny's Jupyter Book - Home"/>
+    <script>document.write(`<img src="../_static/bee-eyebrows.gif" class="logo__image only-dark" alt="Genny's Jupyter Book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Hi there!
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Lesson 1: Foundational Concept of Deep Learning</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../lecturetasks/lecturetask1.html">Lecture Task 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../laboratories/Laboratory1.html">Laboratory Task 1</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="lecture2.html">Lesson 2: Understanding Deep Learnin</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../laboratories/Laboratory2.html">Laboratory Task 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../laboratories/Laboratory3.html">Laboratory Task 3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../laboratories/Laboratory4.html">Laboratory Task 4</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="lecture3.html">PyTorch Tensor Objects Attributes and Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lecture4.html">Main Types of Deep Learning Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lecture5.html">Lesson 3: Applications of Deep Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lecture6.html">CNN Implementation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/gnhl-code/DeepLearning" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/gnhl-code/DeepLearning/issues/new?title=Issue%20on%20page%20%2Flectures/lecture1.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/lectures/lecture1.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lesson 1: Foundational Concept of Deep Learning</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instructional-material"><strong>Instructional Material</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#i-foundational-concept-of-deep-learning"><strong>I.Foundational Concept of Deep Learning</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-scenario"><strong>Example Scenario:</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#laboratory-task-1">Laboratory Task 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#artificial-intelligence-vs-machine-learning-vs-deep-learning"><strong>Artificial Intelligence vs. Machine Learning vs. Deep Learning</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-between-deep-learning-and-machine-learning"><strong>Comparison between Deep Learning and Machine Learning</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#historical-background-of-deep-learning"><strong>Historical Background of Deep Learning</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><strong>Historical Background of Deep Learning</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-task-1">Lecture Task 1</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="lesson-1-foundational-concept-of-deep-learning">
+<h1>Lesson 1: Foundational Concept of Deep Learning<a class="headerlink" href="#lesson-1-foundational-concept-of-deep-learning" title="Link to this heading">#</a></h1>
+<section id="instructional-material">
+<h2><strong>Instructional Material</strong><a class="headerlink" href="#instructional-material" title="Link to this heading">#</a></h2>
+<p>Welcome learners! This guide covers foundational concepts, including the background, history, and evolution of deep learning, and clarifies its distinctions from AI and ML. We delve into the mechanics of deep learning, explaining neural networks, the backpropagation method, types of deep neural networks, and their applications. Additionally, we highlight real-world use cases and current trends in deep learning, and focus on specific algorithms such as Convolutional Neural Networks (CNNs) and strategies for improving both Deep Neural Networks (DNNs) and CNNs. Whether you’re a beginner or an experienced practitioner, this material provides valuable insights and practical knowledge to harness the power of deep learning.</p>
+</section>
+<section id="i-foundational-concept-of-deep-learning">
+<h2><strong>I.Foundational Concept of Deep Learning</strong><a class="headerlink" href="#i-foundational-concept-of-deep-learning" title="Link to this heading">#</a></h2>
+<p>Before diving into the exciting developments in deep learning, let’s take a moment to review what we’ve learned so far. First, we’ll discuss the concept of data analytics. <strong>Data analytics</strong> involves the systematic examination of raw data to draw meaningful conclusions and insights. Many techniques and processes in data analytics have been automated using algorithms and mechanical procedures, making it easier for humans to interpret large datasets. Businesses and other organizations leverage data analytics to enhance their performance and boost profits by employing various software tools to collect and analyze raw data.</p>
+<p><img alt="analytics" src="../_images/analytics.png" /></p>
+<p>The 4 Types of Data Analytics (Matteson A., 2017)</p>
+<p>Data analytics is the field that includes various methods of data exploration. Any kind of information can undergo data analytics to extract insights that can drive improvements. These techniques can uncover trends and metrics that might otherwise be obscured within large datasets. Such insights can then be utilized to optimize processes, enhancing the overall efficiency of a business or system. There are four types of data analytics, each are in their own respective level of <strong>value</strong> and <strong>complexity</strong>.</p>
+<p><strong>Descriptive Analytics</strong></p>
+<p>Descriptive analytics focuses on summarizing historical data to understand what has happened over a given period. It uses data aggregation and data mining techniques to provide insights into past performance and trends. By creating reports, dashboards, and scorecards, descriptive analytics helps organizations understand their current status and how they got there. This form of analytics is foundational, as it provides the context and baseline information necessary for more advanced types of analysis.</p>
+<p><strong>Diagnostic Analytics</strong></p>
+<p>Diagnostic analytics goes a step further by examining data to determine the causes of past outcomes. It delves into the details of descriptive analytics to uncover why certain events occurred. Techniques such as drill-down, data discovery, data mining, and correlations are used to identify patterns and relationships. This type of analytics helps organizations understand the underlying reasons behind trends and anomalies, providing a deeper insight into the factors influencing their performance.</p>
+<p><strong>Predictive Analytics</strong></p>
+<p>Predictive analytics uses statistical models and machine learning algorithms to analyze historical data and make forecasts about future events. By identifying patterns and trends from past data, predictive analytics can estimate the likelihood of future outcomes. This type of analytics is crucial for decision-making, as it allows organizations to anticipate potential challenges and opportunities, helping them to plan and strategize more effectively.</p>
+<p><strong>Prescriptive Analytics</strong></p>
+<p>Prescriptive analytics goes beyond predicting future outcomes by recommending actions to achieve desired results. It uses optimization and simulation algorithms to suggest the best course of action based on the predicted data. Prescriptive analytics takes into account various constraints and objectives, providing specific guidance on how to address potential issues or capitalize on opportunities. This advanced form of analytics supports decision-making by suggesting actions that can help achieve business goals and improve overall performance.</p>
+<p>Understanding the four types of analytics is crucial for mastering artificial intelligence (AI). <strong>Descriptive analytics</strong> lays the groundwork by summarizing historical data, providing insights into past trends essential for building predictive models in AI. <strong>Diagnostic analytics</strong> goes deeper, uncovering the reasons behind trends, which is fundamental in training AI algorithms to recognize patterns and anomalies effectively. <strong>Predictive analytics</strong> plays a pivotal role by forecasting future outcomes based on historical data, a capability vital for AI systems to make informed decisions and projections. Finally, <strong>prescriptive analytics</strong> not only predicts future scenarios but also prescribes optimal actions to achieve desired outcomes, guiding AI systems in making proactive and strategic decisions. Together, these analytics types form the backbone of AI learning, equipping developers and researchers with the tools to enhance AI capabilities, optimize performance, and drive innovation across various domains.</p>
+<section id="example-scenario">
+<h3><strong>Example Scenario:</strong><a class="headerlink" href="#example-scenario" title="Link to this heading">#</a></h3>
+<p>Dr. Jake is a medical doctor and the CEO of Astro JR, a giant pharmaceutical company in the Philippines. To support the production and use of AstroJR’s COVID19 vaccine, this company has implemented a number of business intelligence and data analytics tools. Your task is to provide the appropriate and necessary analytical questions Dr. Jake must ask his analytics team in order to provide better deployment and production of COVID19 vaccines around the world using descriptive, predictive, and prescriptive analytics.</p>
+<ol class="arabic simple">
+<li><p><strong>Descriptive:</strong> How many infected cases since last week?</p></li>
+<li><p><strong>Diagnostic:</strong> What factor affects the demand of AstroJR’s COVID19 vaccine?</p></li>
+<li><p><strong>Predictive:</strong> How many deaths next week?</p></li>
+<li><p><strong>Prescriptive:</strong> If the number of cases will increase next week, how many hospital staff should be here to adequately treat the influx of patients?</p></li>
+</ol>
+<p>To address the key questions identified by the analytics team, historical data on deaths will be crucial. By analyzing this time-series data, the team can leverage statistical modeling techniques to uncover patterns and trends that will enable them to generate accurate forecasts. The inclusion of a time variable in the inquiry makes the use of these statistical models essential, as they are specifically designed to handle and extract insights from data with a temporal component. This predictive modeling process will also introduce the team to the potential applications of <strong>Artificial Intelligence (AI)</strong> in this domain.</p>
+</section>
+</section>
+<section id="laboratory-task-1">
+<h2>Laboratory Task 1<a class="headerlink" href="#laboratory-task-1" title="Link to this heading">#</a></h2>
+<p><strong>Instruction:</strong> From the example scenario above, create additional two inquiries for each type of data analytics.</p>
+<ol class="arabic simple">
+<li><p><strong>Descriptive:</strong></p></li>
+<li><p><strong>Diagnostic:</strong></p></li>
+<li><p><strong>Predictive:</strong></p></li>
+<li><p><strong>Prescriptive:</strong></p></li>
+</ol>
+</section>
+<section id="artificial-intelligence-vs-machine-learning-vs-deep-learning">
+<h2><strong>Artificial Intelligence vs. Machine Learning vs. Deep Learning</strong><a class="headerlink" href="#artificial-intelligence-vs-machine-learning-vs-deep-learning" title="Link to this heading">#</a></h2>
+<p>Having discussed AI previously, let’s now delve into distinguishing between these three areas within predictive analytics.</p>
+<p><img alt="comparison" src="../_images/ai_ml_dl.png" /></p>
+<p>A systematic review of artificial intelligence techniques for collaborative learning over the past two decades (Tan et al., 2022)</p>
+<p>(https://www.sciencedirect.com/science/article/pii/S2666920X22000522)</p>
+<p><strong>Artificial Intelligence</strong></p>
+<p>is the broadest concept and encompasses the idea of creating machines or systems that can perform tasks that typically require human intelligence. This includes <strong>problem-solving</strong>, <strong>understanding natural language</strong>, <strong>recognizing patterns</strong>, and <strong>making decisions</strong>. AI can be achieved through various techniques, including ML and DL.</p>
+<p><strong>Machine Learning</strong></p>
+<p>is a subset of AI that focuses on the development of <strong>algorithms</strong> and <strong>statistical models</strong> that enable computers to learn from and make predictions or decisions based on data. ML doesn’t require explicit programming for every task but relies on the algorithm’s ability to improve its performance as it encounters more data.</p>
+<p><strong>Deep Learning</strong></p>
+<p>is a subfield of ML that deals specifically with <strong>artificial neural networks</strong>, which are composed of multiple layers of interconnected nodes (neurons). DL excels at handling unstructured data, such as images, audio, and text, and has been particularly successful in tasks like image recognition, natural language processing, and speech recognition.</p>
+<p>Artificial Intelligence encompasses creating systems for problem-solving, natural language understanding, pattern recognition, and decision-making. Machine Learning develops algorithms for learning from data to make predictions or decisions without explicit programming. Deep Learning, within Machine Learning, uses neural networks for processing unstructured data like images, audio, and text, achieving remarkable success in tasks such as image recognition and natural language processing.</p>
+</section>
+<section id="comparison-between-deep-learning-and-machine-learning">
+<h2><strong>Comparison between Deep Learning and Machine Learning</strong><a class="headerlink" href="#comparison-between-deep-learning-and-machine-learning" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Machine Learning</p></th>
+<th class="head"><p>Deep Learning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Requires a small amount of training data.</p></td>
+<td><p>Requires a large amount of training data.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Programmer has to manually identify the features that the system will use.</p></td>
+<td><p>Machine automatically identifies the important features based on the training data.</p></td>
+</tr>
+<tr class="row-even"><td><p>In most cases, focus is on solving a particular problem.</p></td>
+<td><p>In most cases, focus is on identifying patterns from the training dataset.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Problem is divided into parts and solved individually and then combined.</p></td>
+<td><p>The entire processing takes place in an end-to-end manner.</p></td>
+</tr>
+<tr class="row-even"><td><p>The output result is easy to understand, since clear rules are provided.</p></td>
+<td><p>The reasoning may be difficult to understand, since the system takes decision based on its own logic.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Training usually costs lesser time.</p></td>
+<td><p>Training usually costs more time.</p></td>
+</tr>
+<tr class="row-even"><td><p>Works in low processing power.</p></td>
+<td><p>Needs high processing power.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Machines can take decision on their own based on past data.</p></td>
+<td><p>Machines take decisions with the help of artificial neural networks.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="historical-background-of-deep-learning">
+<h2><strong>Historical Background of Deep Learning</strong><a class="headerlink" href="#historical-background-of-deep-learning" title="Link to this heading">#</a></h2>
+<p><img alt="pioneers" src="../_images/pioneers.jpeg" /></p>
+<p>The Revolutionary Rise of Deep Learning AI (Rashmi A., 2024)</p>
+<p>(https://medium.com/&#64;picturesqueen01/the-revolutionary-rise-of-deep-learning-ai-0868e3f18290)</p>
+<p>Warren Sturgis McCulloch (1898 – 1969) neurophysiologist and logician and mathematician Walter Pitts (1923 – 1969) are best known for their influential paper in computing and neural network computing A Logical Calculus of Ideas Immanent in Nervous Activity (1943). They were the first to create a mathematical model of a neuron, inspired by the concept of a biological neuron. This led to the development of ever more sophisticated neuron and neural network models and their astounding success in artificial intelligence.</p>
+<p><img alt="ann" src="../_images/neurons.png" /></p>
+<p>An Integrated Machine Learning and Finite Element Analysis Framework, Applied to Composite Substructures including Damage (Gulikers T., 2017)</p>
+<p>](https://www.semanticscholar.org/paper/An-Integrated-Machine-Learning-and-Finite-Element-Gulikers/89c969111800be0cf3187be86c8e64e282b813c7)</p>
+<p>Neural networks are computational models inspired by the intricate structure of the human brain. They consist of layers of interconnected artificial neurons that process and transform information. Just as the neurons in the brain communicate through synapses, these artificial neurons pass signals and weights between them, allowing neural networks to learn and make complex decisions. This bio-inspired architecture enables neural networks to excel in tasks such as image recognition, natural language processing, and pattern recognition, making them a foundational technology in the field of artificial intelligence.</p>
+</section>
+<section id="id1">
+<h2><strong>Historical Background of Deep Learning</strong><a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p><img alt="timeline" src="../_images/historical_dl.jpeg" /></p>
+<p>Deep Learning and Its Applications in Biomedicine (Cao et al., 2018)</p>
+<p>(https://www.researchgate.net/publication/323612444_Deep_Learning_and_Its_Applications_in_Biomedicine)</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Time</p></th>
+<th class="head"><p>Development</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1940s</p></td>
+<td><p>Shallow Neural Networks, also known as feedforward neural networks or single-layer neural networks, are a type of artificial neural network with a limited number of layers between the input and output layers. These networks consist of an input layer, one or more hidden layers (though typically just one), and an output layer. However, in shallow networks, the information flows only in one direction, from the input layer to the output layer, without any feedback loops or complex connections.</p></td>
+</tr>
+<tr class="row-odd"><td><p>1960s to 1970s</p></td>
+<td><p>Seppo Linnainmaa publishes the general method for automatic differentiation (AD) of discrete connected networks of nested differentiable functions. This corresponds to the modern version of backpropagation, but is not yet named as such.</p></td>
+</tr>
+<tr class="row-even"><td><p>1980s</p></td>
+<td><p>Linnainmaa’s automatic differentiation led to the application of Backpropagation in Neural Networks by early 1980s. David Rumelhart, along with Geoffrey Hinton and Ronald Williams, is often credited with popularizing backpropagation as a neural network training algorithm. Their influential 1986 paper, titled “Learning Representations by Back-Propagating Errors,” demonstrated the effectiveness of backpropagation in training multi-layer neural networks for a wide range of tasks. This work significantly contributed to the resurgence of interest in neural networks.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Late 1980s</p></td>
+<td><p>AI’s development stagnated.</p></td>
+</tr>
+<tr class="row-even"><td><p>2006</p></td>
+<td><p>Geoffrey Hinton and his team introduced the concept of Deep Belief Networks, which combined multiple layers of RBMs to form a generative model with deep architecture. DBNs could capture hierarchical representations of data and learn features in an unsupervised manner. They showed that these networks could be fine-tuned with backpropagation for tasks like classification.</p></td>
+</tr>
+<tr class="row-odd"><td><p>2009</p></td>
+<td><p>Application of AI in different fields.</p></td>
+</tr>
+<tr class="row-even"><td><p>2012</p></td>
+<td><p>Development of AlexNet architecture which was primarily designed by Alex Krizhevsky, published with Ilya Sutskever and Krizhevsky’s doctoral advisor Geoffrey Hinton.</p></td>
+</tr>
+<tr class="row-odd"><td><p>2014</p></td>
+<td><p>Development of VGG, Generative Adversarial Networks, and GoogleNet.</p></td>
+</tr>
+<tr class="row-even"><td><p>2015</p></td>
+<td><p>Development of ResNet.</p></td>
+</tr>
+<tr class="row-odd"><td><p>2016</p></td>
+<td><p>Development of DenseNet.</p></td>
+</tr>
+<tr class="row-even"><td><p>2017</p></td>
+<td><p>Development of Wasserstein GAN.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="lecture-task-1">
+<h2>Lecture Task 1<a class="headerlink" href="#lecture-task-1" title="Link to this heading">#</a></h2>
+<p><strong>Instruction:</strong> Create a reaction paper (1 page) about the YouTube video titled “Machine Learning: Living in the Age of AI | A WIRED Film”.</p>
+<p><a class="reference external" href="https://youtu.be/ZJixNvx9BAc"><img alt="YouTube Thumbnail" src="https://i.ytimg.com/vi/ZJixNvx9BAc/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&amp;rs=AOn4CLC2BCMXLS08rsO8o1LJzpXMjxOP9A" /></a></p>
+<p>Use these as guide question for your paper.</p>
+<ul class="simple">
+<li><p>What are some of the most significant advancements in AI that the video highlights as having a positive impact on society?</p></li>
+<li><p>How does the video envision the future of AI, and what challenges and opportunities lie ahead?</p></li>
+<li><p>How can we strike a balance between harnessing the benefits of AI and addressing its potential drawbacks?</p></li>
+</ul>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lectures"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Hi there!</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../lecturetasks/lecturetask1.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Lecture Task 1</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instructional-material"><strong>Instructional Material</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#i-foundational-concept-of-deep-learning"><strong>I.Foundational Concept of Deep Learning</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-scenario"><strong>Example Scenario:</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#laboratory-task-1">Laboratory Task 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#artificial-intelligence-vs-machine-learning-vs-deep-learning"><strong>Artificial Intelligence vs. Machine Learning vs. Deep Learning</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-between-deep-learning-and-machine-learning"><strong>Comparison between Deep Learning and Machine Learning</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#historical-background-of-deep-learning"><strong>Historical Background of Deep Learning</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><strong>Historical Background of Deep Learning</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-task-1">Lecture Task 1</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Genheylou Felisilda
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

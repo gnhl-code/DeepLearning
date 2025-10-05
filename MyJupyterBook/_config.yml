@@ -1,0 +1,56 @@
+# Book settings
+# Learn more at https://jupyterbook.org/customize/config.html
+
+title: Genny's Jupyter Book
+author: Genheylou Felisilda
+logo: bee-eyebrows.gif
+
+# Launch buttons
+Launch buttons:
+  notebook_interface: jupyterlab
+  colab_url: true
+  binderhub_url: true
+
+# table of contents behavior
+toc:
+  numbered: true
+
+sphinx:
+  extra_extensions:
+    - sphinx.ext.autodoc
+    - sphinx.ext.napoleon
+    - sphinx.ext.viewcode
+
+# HTML theme
+html_theme: "sphinx_book_theme"
+
+parse:
+  myst_enable_extensions:
+    - html_image
+
+# Force re-execution of notebooks on each build.
+# See https://jupyterbook.org/content/execute.html
+execute:
+  execute_notebooks: force
+  show_output: true
+
+# Define the name of the latex output file for PDF builds
+latex:
+  latex_documents:
+    targetname: book.tex
+
+# Add a bibtex file so that we can create citations
+bibtex_bibfiles:
+  - references.bib
+
+# Information about where the book exists on the web
+repository:
+  url: https://github.com/gnhl-code/DeepLearning  # Online location of your book
+  path_to_book: docs  # Optional path to your book, relative to the repository root
+  branch: master  # Which branch of the repository should be used when creating links (optional)
+
+# Add GitHub buttons to your book
+# See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
+html:
+  use_issues_button: true
+  use_repository_button: true
