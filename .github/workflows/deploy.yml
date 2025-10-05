@@ -35,7 +35,7 @@ jobs:
         run: jupyter-book --version
 
       - name: Build the book
-        run: jupyter-book build chapters
+        run: jupyter-book build MyJupyterBook
 
       - name: Debug - Check if HTML build exists
         run: ls -la MyJupyterBook/_build/html || echo "HTML build directory missing!"
