@@ -28,7 +28,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt
+          pip install -r MyJupyterBook/requirements.txt
           pip install jupyter-book
 
       - name: Check Jupyter Book version
