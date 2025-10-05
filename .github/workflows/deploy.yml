@@ -38,7 +38,7 @@ jobs:
         run: jupyter-book build chapters
 
       - name: Debug - Check if HTML build exists
-        run: ls -la chapters/_build/html || echo "HTML build directory missing!"
+        run: ls -la MyJupyterBook/_build/html || echo "HTML build directory missing!"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
