@@ -57,6 +57,8 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'laboratories/Laboratory2';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -403,114 +405,129 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="laboratory-task-2">
+  <section class="tex2jax_ignore mathjax_ignore" id="laboratory-task-2">
 <h1>Laboratory Task 2<a class="headerlink" href="#laboratory-task-2" title="Link to this heading">#</a></h1>
 <p>Genheylou Felisilda - DS4A</p>
 <p>Instruction: Perform a single forward pass and compute for the error.</p>
-<p>$
+<p><span class="math notranslate nohighlight">\(
 x = \begin{bmatrix}
-1 \
-0 \
-1 \
+1 \\
+0 \\
+1 \\
 \end{bmatrix}
-$</p>
-<p>$
+\)</span></p>
+<p><span class="math notranslate nohighlight">\(
 y = \begin{bmatrix}
-1 \
+1 \\
 \end{bmatrix}
-$</p>
-<p>$
+\)</span></p>
+<p><span class="math notranslate nohighlight">\(
 f(z) = max(0, Z_n)
-$</p>
+\)</span></p>
 <p>$
-\text{hidden unit weights} =
-\begin{bmatrix}
-w_{11} &amp; = &amp; 0.2   &amp; w_{12} &amp; = &amp; -0.3 \
-w_{13} &amp; = &amp; 0.4   &amp; w_{14} &amp; = &amp; 0.1  \
+\text{hidden unit weights} =</p>
+<div class="amsmath math notranslate nohighlight" id="equation-b755b0de-752f-402b-8e2e-0819e74f5398">
+<span class="eqno">(1)<a class="headerlink" href="#equation-b755b0de-752f-402b-8e2e-0819e74f5398" title="Permalink to this equation">#</a></span>\[\begin{bmatrix}
+w_{11} &amp; = &amp; 0.2   &amp; w_{12} &amp; = &amp; -0.3 \\
+w_{13} &amp; = &amp; 0.4   &amp; w_{14} &amp; = &amp; 0.1  \\
 w_{15} &amp; = &amp; -0.5  &amp; w_{16} &amp; = &amp; 0.2
-\end{bmatrix}
-$</p>
+\end{bmatrix}\]</div>
+<p>$</p>
 <p>$
-\text{output unit weights} =
-\begin{bmatrix}
-w_{21} &amp; = &amp; -0.3 \
+\text{output unit weights} =</p>
+<div class="amsmath math notranslate nohighlight" id="equation-162e485f-7e58-42d8-b9e1-97d90ef0c4d6">
+<span class="eqno">(2)<a class="headerlink" href="#equation-162e485f-7e58-42d8-b9e1-97d90ef0c4d6" title="Permalink to this equation">#</a></span>\[\begin{bmatrix}
+w_{21} &amp; = &amp; -0.3 \\
 w_{22} &amp; = &amp; -0.2
-\end{bmatrix}
-$</p>
+\end{bmatrix}\]</div>
+<p>$</p>
 <p>$
-\theta =
-\begin{bmatrix}
-\theta_1 &amp; = &amp; -0.4 \
-\theta_2 &amp; = &amp; 0.2 \
+\theta =</p>
+<div class="amsmath math notranslate nohighlight" id="equation-bdfc2286-e6c0-4cb6-beab-08e74049fc4e">
+<span class="eqno">(3)<a class="headerlink" href="#equation-bdfc2286-e6c0-4cb6-beab-08e74049fc4e" title="Permalink to this equation">#</a></span>\[\begin{bmatrix}
+\theta_1 &amp; = &amp; -0.4 \\
+\theta_2 &amp; = &amp; 0.2 \\
 \theta_3 &amp; = &amp; 0.1
-\end{bmatrix}
-$</p>
+\end{bmatrix}\]</div>
+<p>$</p>
 <div class="alert alert-block alert-success" style="font-family: Arial">
 <p style="font-family:Times New Roman; text-align:justify; font-size:15px">
 <section id="solution">
 <h2><strong>Solution</strong><a class="headerlink" href="#solution" title="Link to this heading">#</a></h2>
 <p><strong>Hidden Layer</strong></p>
 <p>Compute each hidden unit pre-activation:</p>
-<p>$$
+<div class="math notranslate nohighlight">
+\[
 z_1 = (1)(0.2) + (0)(0.4) + (1)(-0.5) + (-0.4) = -0.7
-$$</p>
-<p>$$
+\]</div>
+<div class="math notranslate nohighlight">
+\[
 z_2 = (1)(-0.3) + (0)(0.1) + (1)(0.2) + (0.2) = 0.1
-$$</p>
-<p>Apply activation $(a_i = f(z_i))$:</p>
-<p>$$
+\]</div>
+<p>Apply activation <span class="math notranslate nohighlight">\((a_i = f(z_i))\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
 a_1 = f(z_1) = f(-0.7) = 0, \quad
 a_2 = f(z_2) = f(0.1) = 0.1
-$$</p>
+\]</div>
 <p>So the hidden activations are:</p>
-<p>$$
+<div class="math notranslate nohighlight">
+\[\begin{split}
 \mathbf{a} =
 \begin{bmatrix}
-0 \
+0 \\
 0.1
 \end{bmatrix}
-$$</p>
+\end{split}\]</div>
 <hr class="docutils" />
 <p><strong>Output Layer</strong></p>
 <p>Weights and bias:</p>
-<p>$$
+<div class="math notranslate nohighlight">
+\[\begin{split}
 \mathbf{w}^{(o)} =
 \begin{bmatrix}
--0.3 \
+-0.3 \\
 -0.2
 \end{bmatrix},
 \quad
 \theta^{(o)} = 0.1
-$$</p>
+\end{split}\]</div>
 <p>Pre-activation:</p>
-<p>$$
+<div class="math notranslate nohighlight">
+\[
 z_o = (a_1)(-0.3) + (a_2)(-0.2) + \theta^{(o)}
-$$</p>
-<p>$$
+\]</div>
+<div class="math notranslate nohighlight">
+\[
 z_o = (0)(-0.3) + (0.1)(-0.2) + 0.1 = 0.08
-$$</p>
+\]</div>
 <p>Activation:</p>
-<p>$$
+<div class="math notranslate nohighlight">
+\[
 \hat{y} = f(z_o) = f(0.08) = 0.08
-$$</p>
+\]</div>
 <hr class="docutils" />
 <p><strong>Error Calculation</strong></p>
 <p>Target:</p>
-<p>$$
+<div class="math notranslate nohighlight">
+\[
 y = \begin{bmatrix} 1 \end{bmatrix}
-$$</p>
+\]</div>
 <p>Error:</p>
-<p>$$
+<div class="math notranslate nohighlight">
+\[
 E = \tfrac{1}{2}(y - \hat{y})^2
-$$</p>
-<p>$$
+\]</div>
+<div class="math notranslate nohighlight">
+\[
 E = \tfrac{1}{2}(1 - 0.08)^2 = \tfrac{1}{2}(0.92^2) = 0.4232
-$$</p>
+\]</div>
 <hr class="docutils" />
 <p><strong>Final Results:</strong></p>
-<p>$$
+<div class="math notranslate nohighlight">
+\[
 \hat{y} = 0.08, \quad E = 0.4232
-$$</p>
+\]</div>
 </p>
 </div>
 </section>

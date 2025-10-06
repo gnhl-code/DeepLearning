@@ -57,6 +57,8 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'lectures/lecture2';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -409,7 +411,7 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="lesson-2-understanding-deep-learnin">
+  <section class="tex2jax_ignore mathjax_ignore" id="lesson-2-understanding-deep-learnin">
 <h1>Lesson 2: Understanding Deep Learnin<a class="headerlink" href="#lesson-2-understanding-deep-learnin" title="Link to this heading">#</a></h1>
 <p>Having explored the historical background and inspiration behind deep learning, we can now delve into understanding the underlying mechanisms of this seemingly sci-fi technology. This journey will uncover how deep learning works, including the foundational concepts, methodologies, and real-world applications that make it a transformative force in modern technology.</p>
 <section id="artificial-neural-network">
@@ -422,31 +424,34 @@ document.write(`
 <section id="feedforward-neural-network">
 <h2><strong>Feedforward Neural Network</strong><a class="headerlink" href="#feedforward-neural-network" title="Link to this heading">#</a></h2>
 <p>The feedforward neural network is one of the most basic artificial neural networks (ANNs). In this ANN, the data or input provided travels in a single direction. It enters the ANN through the input layer and exits through the output layer, while hidden layers may or may not exist. The feedforward neural network has a front-propagated wave only and usually does not involve backpropagation.</p>
-<p>Assume neurons have a <strong>sigmoid activation function</strong>, actual output $y = 1$, and <strong>learning rate</strong> $\alpha = 0.9$.</p>
+<p>Assume neurons have a <strong>sigmoid activation function</strong>, actual output <span class="math notranslate nohighlight">\(y = 1\)</span>, and <strong>learning rate</strong> <span class="math notranslate nohighlight">\(\alpha = 0.9\)</span>.</p>
 <hr class="docutils" />
-<p>To calculate $H_1$, we need to calculate first the weighted sum of the input values added by the bias $\theta$.</p>
-<p>$$
+<p>To calculate <span class="math notranslate nohighlight">\(H_1\)</span>, we need to calculate first the weighted sum of the input values added by the bias <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
 \begin{aligned}
-Z &amp;= \sum_j (w_{i,j} \cdot x_i) + \theta_i \
-Z_1 &amp;= (w_{11} \cdot x_1) + (w_{13} \cdot x_2) + (w_{15} \cdot x_3) + \theta_1 \
+Z &amp;= \sum_j (w_{i,j} \cdot x_i) + \theta_i \\
+Z_1 &amp;= (w_{11} \cdot x_1) + (w_{13} \cdot x_2) + (w_{15} \cdot x_3) + \theta_1 \\
 Z_2 &amp;= (w_{12} \cdot x_1) + (w_{14} \cdot x_2) + (w_{16} \cdot x_3) + \theta_2
 \end{aligned}
-$$</p>
+\end{split}\]</div>
 <p>After computing the <strong>weighted sum</strong>, we introduce non-linearity to the output result by applying a nonlinear function. For this example, let’s use <strong>sigmoid function.</strong></p>
-<p>$$
+<div class="math notranslate nohighlight">
+\[\begin{split}
 \begin{aligned}
-\sigma(Z_i) &amp;= \frac{1}{1 + e^{-Z_i}} \
-H_1 &amp;= \sigma(Z_1) \
+\sigma(Z_i) &amp;= \frac{1}{1 + e^{-Z_i}} \\
+H_1 &amp;= \sigma(Z_1) \\
 H_2 &amp;= \sigma(Z_2)
 \end{aligned}
-$$</p>
-<p>Now that we have computed the hidden layer’s value, we can now proceed to computing the weighted sum for the output layer using the same procedure as how we compute the $Z_n$ and $H_n$.</p>
-<p>$$
+\end{split}\]</div>
+<p>Now that we have computed the hidden layer’s value, we can now proceed to computing the weighted sum for the output layer using the same procedure as how we compute the <span class="math notranslate nohighlight">\(Z_n\)</span> and <span class="math notranslate nohighlight">\(H_n\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
 \begin{aligned}
-Z_3 &amp;= (w_{21} \cdot H_1) + (w_{22} \cdot H_2) + \theta_3 \
+Z_3 &amp;= (w_{21} \cdot H_1) + (w_{22} \cdot H_2) + \theta_3 \\
 \hat{y} &amp;= \sigma(Z_3)
 \end{aligned}
-$$</p>
+\end{split}\]</div>
 <p>This is how the calculations in a feedforward neural network are traversed from input to output.</p>
 <hr class="docutils" />
 </section>
@@ -454,64 +459,70 @@ $$</p>
 <h2>Laboratory Task 2<a class="headerlink" href="#laboratory-task-2" title="Link to this heading">#</a></h2>
 <p>Instruction: Perform a single forward pass and compute for the error.</p>
 <p>Input vector:</p>
-<p>$$
-x = \begin{bmatrix} 1 \ 0 \ 1 \end{bmatrix}
-$$</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+x = \begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}
+\end{split}\]</div>
 <p>Target output:</p>
-<p>$$
+<div class="math notranslate nohighlight">
+\[
 y = \begin{bmatrix} 1 \end{bmatrix}
-$$</p>
+\]</div>
 <p>Activation function for this example (ReLU):</p>
-<p>$$
+<div class="math notranslate nohighlight">
+\[
 f = \max(0, Z_n)
-$$</p>
+\]</div>
 <p>Hidden layer weights:</p>
-<p>$$
+<div class="math notranslate nohighlight">
+\[\begin{split}
 W_{\text{hidden}} =
 \begin{bmatrix}
-w_{11} = 0.2 &amp; w_{12} = -0.3 \
-w_{13} = 0.4 &amp; w_{14} = 0.1 \
+w_{11} = 0.2 &amp; w_{12} = -0.3 \\
+w_{13} = 0.4 &amp; w_{14} = 0.1 \\
 w_{15} = -0.5 &amp; w_{16} = 0.2
 \end{bmatrix}
-$$</p>
+\end{split}\]</div>
 <p>Output layer weights:</p>
-<p>$$
+<div class="math notranslate nohighlight">
+\[\begin{split}
 W_{\text{output}} =
 \begin{bmatrix}
-w_{21} = -0.3 \
+w_{21} = -0.3 \\
 w_{22} = -0.2
 \end{bmatrix}
-$$</p>
+\end{split}\]</div>
 <p>Bias vector:</p>
-<p>$$
+<div class="math notranslate nohighlight">
+\[\begin{split}
 \theta =
 \begin{bmatrix}
-\theta_1 = -0.4 \
-\theta_2 = 0.2 \
+\theta_1 = -0.4 \\
+\theta_2 = 0.2 \\
 \theta_3 = 0.1
 \end{bmatrix}
-$$</p>
+\end{split}\]</div>
 <hr class="docutils" />
 </section>
 <section id="backward-propagation-of-errors">
 <h2><strong>Backward Propagation of Errors</strong><a class="headerlink" href="#backward-propagation-of-errors" title="Link to this heading">#</a></h2>
 <p>Backward propagation a.k.a backprop or backward pass is a fundamental algorithm used for training artificial neural networks. It involves a two-step process: a forward pass and a backward pass. During the forward pass, input data is fed through the network, and the output is generated. The error, or the difference between the predicted output and the actual target, is then calculated. In the backward pass, this error is propagated back through the network, layer by layer, to update the weights and biases. This is done by computing the gradient of the loss function with respect to each weight using the chain rule of calculus. By iteratively adjusting the weights in the direction that reduces the error, backpropagation helps the network learn and improve its performance over time. This process continues until the network’s predictions are sufficiently accurate or another stopping criterion is met.</p>
-<p>The initial value for $\hat{y}$ is not the optimal value since the parameters used were just randomly selected. Therefore, after the forward propagation, a backward propagation algorithm is employed to update the parameters ($w$ and $\theta$).</p>
-<p>The error at the output layer is calculated as the difference between the predicted output ($\hat{y}$) and the actual output ($y$):
-$$\delta = \hat{y} - y$$
-Compute Hidden Layer Error ($\delta_h$)
-$$\delta_h = (\delta_o W^T_o) \cdot \sigma’(Z_h)$$
+<p>The initial value for <span class="math notranslate nohighlight">\(\hat{y}\)</span> is not the optimal value since the parameters used were just randomly selected. Therefore, after the forward propagation, a backward propagation algorithm is employed to update the parameters (<span class="math notranslate nohighlight">\(w\)</span> and <span class="math notranslate nohighlight">\(\theta\)</span>).</p>
+<p>The error at the output layer is calculated as the difference between the predicted output (<span class="math notranslate nohighlight">\(\hat{y}\)</span>) and the actual output (<span class="math notranslate nohighlight">\(y\)</span>):
+$<span class="math notranslate nohighlight">\(\delta = \hat{y} - y\)</span><span class="math notranslate nohighlight">\(
+Compute Hidden Layer Error (\)</span>\delta_h<span class="math notranslate nohighlight">\()
+\)</span><span class="math notranslate nohighlight">\(\delta_h = (\delta_o W^T_o) \cdot \sigma'(Z_h)\)</span>$
 Where:</p>
-<p>$\sigma’(Z_h)$ is the derivative of the sigmoid activation function applied to the hidden layer activations $Z_h$:
-$\sigma’(Z_h) = A_h \cdot (1 - A_h)$
-$W^T_o$ is the transpose of the output weights matrix $W_o$.</p>
+<p><span class="math notranslate nohighlight">\(\sigma'(Z_h)\)</span> is the derivative of the sigmoid activation function applied to the hidden layer activations <span class="math notranslate nohighlight">\(Z_h\)</span>:
+<span class="math notranslate nohighlight">\(\sigma'(Z_h) = A_h \cdot (1 - A_h)\)</span>
+<span class="math notranslate nohighlight">\(W^T_o\)</span> is the transpose of the output weights matrix <span class="math notranslate nohighlight">\(W_o\)</span>.</p>
 <p>Calculate Gradients
-Once we have the errors ($\delta_o$ and $\delta_h$), we compute the gradients of the error with respect to the weights ($W_o$ and $W_h$).
-Gradients for Output Layer Weights ($\frac{\partial E}{\partial W_o}$)
-$$\frac{\partial E}{\partial W_o} = A\frac{T}{h} \delta_o$$
-Gradients for Hidden Layer Weights ($\frac{\partial E }{\partial W_h}$)
-$$\frac{\partial E}{\partial W_h} = X^T \delta_h$$
-Finally, the weights are updated using the gradients and the learning rate ($\alpha$).</p>
+Once we have the errors (<span class="math notranslate nohighlight">\(\delta_o\)</span> and <span class="math notranslate nohighlight">\(\delta_h\)</span>), we compute the gradients of the error with respect to the weights (<span class="math notranslate nohighlight">\(W_o\)</span> and <span class="math notranslate nohighlight">\(W_h\)</span>).
+Gradients for Output Layer Weights (<span class="math notranslate nohighlight">\(\frac{\partial E}{\partial W_o}\)</span>)
+$<span class="math notranslate nohighlight">\(\frac{\partial E}{\partial W_o} = A\frac{T}{h} \delta_o\)</span><span class="math notranslate nohighlight">\(
+Gradients for Hidden Layer Weights (\)</span>\frac{\partial E }{\partial W_h}<span class="math notranslate nohighlight">\()
+\)</span><span class="math notranslate nohighlight">\(\frac{\partial E}{\partial W_h} = X^T \delta_h\)</span><span class="math notranslate nohighlight">\(
+Finally, the weights are updated using the gradients and the learning rate (\)</span>\alpha$).</p>
 <hr class="docutils" />
 </section>
 <section id="laboratory-task-3">
@@ -602,12 +613,14 @@ when prompted with a question to proceed installation.
 <p>Consider this data:</p>
 <p><img alt="table" src="../_images/japan.png" /></p>
 <p>In a linear regression model, each target variable is estimated to be a weighted sum of the input variables, offset by some constant, known as a bias :</p>
-<p>$$
-\text{yield}<em>{\text{apple}} = w</em>{11} \cdot \text{temp} + w_{12} \cdot \text{rainfall} + w_{13} \cdot \text{humidity} + b_{1}
-$$</p>
-<p>$$
-\text{yield}<em>{\text{orange}} = w</em>{21} \cdot \text{temp} + w_{22} \cdot \text{rainfall} + w_{23} \cdot \text{humidity} + b_{2}
-$$</p>
+<div class="math notranslate nohighlight">
+\[
+\text{yield}_{\text{apple}} = w_{11} \cdot \text{temp} + w_{12} \cdot \text{rainfall} + w_{13} \cdot \text{humidity} + b_{1}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\text{yield}_{\text{orange}} = w_{21} \cdot \text{temp} + w_{22} \cdot \text{rainfall} + w_{23} \cdot \text{humidity} + b_{2}
+\]</div>
 <p>Visually, it means that the yield of apples is a linear or planar function of temperature, rainfall and humidity:</p>
 <p><img alt="japan2" src="../_images/japan2.png" /></p>
 <p>The learning part of linear regression is to figure out a set of weights <strong>w11, w12,… w23, b1 &amp; b2</strong> using gradient descent.</p>

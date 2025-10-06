@@ -57,6 +57,8 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'lectures/lecture3';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -418,7 +420,7 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="pytorch-tensor-objects-attributes-and-methods">
+  <section class="tex2jax_ignore mathjax_ignore" id="pytorch-tensor-objects-attributes-and-methods">
 <h1>PyTorch Tensor Objects Attributes and Methods<a class="headerlink" href="#pytorch-tensor-objects-attributes-and-methods" title="Link to this heading">#</a></h1>
 <p>This will cover the following operations of a tensor object:</p>
 <ul class="simple">
@@ -967,13 +969,15 @@ For example, torch.div(a,b) performs floor division (truncates the decimal) for 
 <section id="dot-products">
 <h2><strong>6. Dot Products</strong><a class="headerlink" href="#dot-products" title="Link to this heading">#</a></h2>
 <p>A <a class="reference external" href="https://en.wikipedia.org/wiki/Dot_product">dot product</a> is the sum of the products of the corresponding entries of two 1D tensors. If the tensors are both vectors, the dot product is given as:</p>
-<p>$$
+<div class="math notranslate nohighlight">
+\[
 \begin{bmatrix} a &amp; b &amp; c \end{bmatrix} \cdot \begin{bmatrix} d &amp; e &amp; f \end{bmatrix} = ad + be + cf
-$$</p>
+\]</div>
 <p>If the tensors include a column vector, then the dot product is the sum of the result of the multiplied matrices. For example:</p>
-<p>$$
-\begin{bmatrix} a &amp; b &amp; c \end{bmatrix} \cdot \begin{bmatrix} d \ e \ f \end{bmatrix} = ad + be + cf
-$$</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix} a &amp; b &amp; c \end{bmatrix} \cdot \begin{bmatrix} d \\ e \\ f \end{bmatrix} = ad + be + cf
+\end{split}\]</div>
 <p>Dot products can be expressed as <a class="reference external" href="https://pytorch.org/docs/stable/torch.html#torch.dot"><strong>torch.dot(a,b)</strong></a> or a.dot(b) or b.dot(a)</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">)</span> 
 <span class="n">b</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">)</span> 
@@ -985,8 +989,8 @@ $$</p>
 </section>
 <section id="matrix-multiplication">
 <h2><strong>7. Matrix Multiplication</strong><a class="headerlink" href="#matrix-multiplication" title="Link to this heading">#</a></h2>
-<p>2D <a class="reference external" href="https://en.wikipedia.org/wiki/Matrix_multiplication">Matrix multiplication</a> is possible when the number of columns in tensor <strong>A</strong> matches the number of rows in tensor <strong>B</strong>. In this case, the product of tensor <strong>A</strong> with size $(x,y)$ and tensor <strong>B</strong> with size $(y,z)$ results in a tensor of size $(x,z)$<br />
-$begin{bmatrix} a &amp; b &amp; c  d &amp; e &amp; f end{bmatrix} ;times; begin{bmatrix} m &amp; n  p &amp; q  r &amp; s end{bmatrix} = begin{bmatrix} (am+bp+cr) &amp; (an+bq+cs)  (dm+ep+fr) &amp; (dn+eq+fs) end{bmatrix}$<br />
+<p>2D <a class="reference external" href="https://en.wikipedia.org/wiki/Matrix_multiplication">Matrix multiplication</a> is possible when the number of columns in tensor <strong>A</strong> matches the number of rows in tensor <strong>B</strong>. In this case, the product of tensor <strong>A</strong> with size <span class="math notranslate nohighlight">\((x,y)\)</span> and tensor <strong>B</strong> with size <span class="math notranslate nohighlight">\((y,z)\)</span> results in a tensor of size <span class="math notranslate nohighlight">\((x,z)\)</span><br />
+<span class="math notranslate nohighlight">\(begin{bmatrix} a &amp; b &amp; c  d &amp; e &amp; f end{bmatrix} ;times; begin{bmatrix} m &amp; n  p &amp; q  r &amp; s end{bmatrix} = begin{bmatrix} (am+bp+cr) &amp; (an+bq+cs)  (dm+ep+fr) &amp; (dn+eq+fs) end{bmatrix}\)</span><br />
 Matrix multiplication can be computed using <a class="reference external" href="https://pytorch.org/docs/stable/torch.html#torch.mm"><strong>torch.mm(a,b)</strong></a> or a.mm(b) or a &#64; b</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">)</span> 
 <span class="n">b</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">],[</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">],[</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">)</span> 
@@ -1041,9 +1045,9 @@ a x b: torch.Size([2, 2])</p>
 <h2><strong>8. Additional Operations</strong><a class="headerlink" href="#additional-operations" title="Link to this heading">#</a></h2>
 <p><strong>L2 or Euclidean Norm</strong></p>
 <p>See <a class="reference external" href="https://pytorch.org/docs/stable/torch.html#torch.norm"><strong>torch.norm()</strong></a><br />
-  The <a class="reference external" href="https://en.wikipedia.org/wiki/Norm_(mathematics)#Euclidean_norm">Euclidian Norm</a> gives the vector norm of $x$ where $x=(x_1,x_2,…,x_n)$.</p>
+  The <a class="reference external" href="https://en.wikipedia.org/wiki/Norm_(mathematics)#Euclidean_norm">Euclidian Norm</a> gives the vector norm of <span class="math notranslate nohighlight">\(x\)</span> where <span class="math notranslate nohighlight">\(x=(x_1,x_2,...,x_n)\)</span>.</p>
 <p>It is calculated as</p>
-<p>${displaystyle left|{boldsymbol {x}}right|<em>{2}:={sqrt {x</em>{1}^{2}+cdots +x_{n}^{2}}}}$</p>
+<p><span class="math notranslate nohighlight">\({displaystyle left|{boldsymbol {x}}right|_{2}:={sqrt {x_{1}^{2}+cdots +x_{n}^{2}}}}\)</span></p>
 <p>When applied to a matrix, torch.norm() returns the <a class="reference external" href="https://en.wikipedia.org/wiki/Matrix_norm#Frobenius_norm">Frobenius norm</a> by default.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mf">2.</span><span class="p">,</span><span class="mf">5.</span><span class="p">,</span><span class="mf">8.</span><span class="p">,</span><span class="mf">14.</span><span class="p">])</span> 
 <span class="n">x</span><span class="o">.</span><span class="n">norm</span><span class="p">()</span> 

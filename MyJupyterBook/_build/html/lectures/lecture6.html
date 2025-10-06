@@ -57,6 +57,8 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'lectures/lecture6';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -419,7 +421,7 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="cnn-implementation">
+  <section class="tex2jax_ignore mathjax_ignore" id="cnn-implementation">
 <h1>CNN Implementation<a class="headerlink" href="#cnn-implementation" title="Link to this heading">#</a></h1>
 <section id="training-cnn-model-using-mnist-dataset-for-this-demonstration-we-will-be-using-the-mnist-dataset-which-is-a-popular-dataset-for-training-deep-learning-models">
 <h2>Training CNN Model using MNIST Dataset For this demonstration we will be using the MNIST dataset, which is a popular dataset for training deep learning models.<a class="headerlink" href="#training-cnn-model-using-mnist-dataset-for-this-demonstration-we-will-be-using-the-mnist-dataset-which-is-a-popular-dataset-for-training-deep-learning-models" title="Link to this heading">#</a></h2>
@@ -615,7 +617,7 @@ Why is it that the true and the predicted value is very distant from each other?
 </pre></div>
 </div>
 <p>Model Parameters:</p>
-<p>$quadbegin{align}(1times32times3times3)+32+(32times64times3times3)+64+(3136times128)+128+(128times10)+10 &amp;= 288+32+18432+64+401408+128+1280+10 &amp;= 421,642end{align}$</p>
+<p><span class="math notranslate nohighlight">\(quadbegin{align}(1times32times3times3)+32+(32times64times3times3)+64+(3136times128)+128+(128times10)+10 &amp;= 288+32+18432+64+401408+128+1280+10 &amp;= 421,642end{align}\)</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">count_parameters</span><span class="p">(</span><span class="n">model</span><span class="p">):</span>
     <span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">numel</span><span class="p">()</span> 
     <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">()</span> 

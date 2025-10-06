@@ -57,6 +57,8 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'lectures/lecture5';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -414,7 +416,7 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="lesson-3-applications-of-deep-learning">
+  <section class="tex2jax_ignore mathjax_ignore" id="lesson-3-applications-of-deep-learning">
 <h1>Lesson 3: Applications of Deep Learning<a class="headerlink" href="#lesson-3-applications-of-deep-learning" title="Link to this heading">#</a></h1>
 <p>Deep learning has revolutionized multitude of tasks, transforming industries through its unparalleled ability to process and understand complex data. From computer vision tasks such as image and video analysis to natural language processing (NLP), time series analysis, and recommendation systems, deep learning models have redefined what is possible in AI-driven applications. By leveraging deep neural networks with multiple layers of abstraction, these systems can autonomously learn patterns and features from vast datasets, enabling unprecedented levels of accuracy and efficiency in tasks that traditionally required human intervention. This transformative technology has not only optimized processes in fields like healthcare, finance, and retail but has also paved the way for new innovations in personalized services, predictive analytics, and interactive user experiences. As a result, deep learning stands at the forefront of AI advancements, continually expanding its reach and capabilities across diverse domains, driven by its capacity to handle and interpret a wide array of data types with remarkable precision.</p>
 <section id="group-activty">
@@ -557,40 +559,43 @@ Answered by Andrey Lukyanenko (Stack Overflow)</p>
 <p>The most important building block of a CNN is the <strong>convolutional layer</strong>. It is a mathematical operation that <em>slides</em> one function over another and measures the integral of their pointwise multiplication. Convolutional network works on the central concept of a convolution operation like this:</p>
 <p><img alt="gif" src="../_images/no_padding_no_strides.gif" /></p>
 <p>Mathematically, it looks like this:<br />
-Let’s say we have a 5 x 5 input image $I$ of channel 0 of batch 0. Hence, its shape is <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">5,</span> <span class="pre">5)</span></code>:</p>
-<p>$$
+Let’s say we have a 5 x 5 input image <span class="math notranslate nohighlight">\(I\)</span> of channel 0 of batch 0. Hence, its shape is <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">5,</span> <span class="pre">5)</span></code>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
 I = \begin{bmatrix}
-i_{11} &amp; i_{12} &amp; i_{13} &amp; i_{14} &amp; i_{15} \
-i_{21} &amp; i_{22} &amp; i_{23} &amp; i_{24} &amp; i_{25} \
-i_{31} &amp; i_{32} &amp; i_{33} &amp; i_{34} &amp; i_{35} \
-i_{41} &amp; i_{42} &amp; i_{43} &amp; i_{44} &amp; i_{45} \
+i_{11} &amp; i_{12} &amp; i_{13} &amp; i_{14} &amp; i_{15} \\
+i_{21} &amp; i_{22} &amp; i_{23} &amp; i_{24} &amp; i_{25} \\
+i_{31} &amp; i_{32} &amp; i_{33} &amp; i_{34} &amp; i_{35} \\
+i_{41} &amp; i_{42} &amp; i_{43} &amp; i_{44} &amp; i_{45} \\
 i_{51} &amp; i_{52} &amp; i_{53} &amp; i_{54} &amp; i_{55}
 \end{bmatrix}
-$$</p>
+\end{split}\]</div>
 <p>Each of this pixel may represent the brightness ranging from 0 to 255. Or if normalized, shall be 0 to 1.<br />
 If we define a 3 x 3 patch which we commonly called <strong>weights (W)</strong> or in computer vision, we called <strong>filters/kernels</strong> like this (<em>we shall called filters in this lecture note for simplicity</em>) :</p>
-<p>$$
+<div class="math notranslate nohighlight">
+\[\begin{split}
 W = \begin{bmatrix}
-w_{11} &amp; w_{12} &amp; w_{13} \
-w_{21} &amp; w_{22} &amp; w_{23} \
+w_{11} &amp; w_{12} &amp; w_{13} \\
+w_{21} &amp; w_{22} &amp; w_{23} \\
 w_{31} &amp; w_{32} &amp; w_{33}
 \end{bmatrix}
-$$</p>
-<p>Let’s say we are scanning the middle of the image, then the output feature would be (we’ll denote this as $o_{33}$):</p>
-<p>$$
-output_{33} =
-w_{11} \cdot i_{22} +
-w_{12} \cdot i_{23} +
-w_{13} \cdot i_{24} +
-w_{21} \cdot i_{32} +
-w_{22} \cdot i_{33} +
-w_{23} \cdot i_{34} +
-w_{31} \cdot i_{42} +
-w_{32} \cdot i_{43} +
+\end{split}\]</div>
+<p>Let’s say we are scanning the middle of the image, then the output feature would be (we’ll denote this as <span class="math notranslate nohighlight">\(o\_{33}\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[
+output_{33} = 
+w_{11} \cdot i_{22} + 
+w_{12} \cdot i_{23} + 
+w_{13} \cdot i_{24} + 
+w_{21} \cdot i_{32} + 
+w_{22} \cdot i_{33} + 
+w_{23} \cdot i_{34} + 
+w_{31} \cdot i_{42} + 
+w_{32} \cdot i_{43} + 
 w_{33} \cdot i_{44}
-$$</p>
+\]</div>
 <p>This will result in one output feature called <strong>feature map</strong>. Of course, we may add bias to it and then will be fed through an activation function.<br />
-Actual feature maps look like this. Each feature map is a output of a single training example and convolve each kernel over the sample. In simple words, if we have $k$ filters, then we have $k$ feature maps. They represent the activation part corresponding to the kernels.</p>
+Actual feature maps look like this. Each feature map is a output of a single training example and convolve each kernel over the sample. In simple words, if we have <span class="math notranslate nohighlight">\(k\)</span> filters, then we have <span class="math notranslate nohighlight">\(k\)</span> feature maps. They represent the activation part corresponding to the kernels.</p>
 <p><img alt="maps" src="../_images/feature-map2.png" /></p>
 <p>Using the example above, we apply the filters to the picture of Hagrid.</p>
 <p>In using PyTorch, we primarily use the script <strong>torch.nn.Conv2d(input_channels, output_channels, kernel_size, stride = 1, padding = 0)</strong><br />
@@ -601,13 +606,14 @@ In a convolution operation, there are 3 main hyperparameters to fine tune - (1) 
 <ol class="arabic simple">
 <li><p><strong>How the filters look like?</strong> It turns out that each filter actually detects the presence of certain visual patterns. For example, this filter below detects whether there is an edge at that location of the image. There are also other similar filters detecting corners, lines, etc. Check out <a class="reference external" href="https://setosa.io/ev/image-kernels/">https://setosa.io/ev/image-kernels/</a> and try changing the values</p></li>
 </ol>
-<p>$$
+<div class="math notranslate nohighlight">
+\[\begin{split}
 w = \begin{bmatrix}
-0 &amp; 1 &amp; 0 \
-1 &amp; -4 &amp; 1 \
+0 &amp; 1 &amp; 0 \\
+1 &amp; -4 &amp; 1 \\
 0 &amp; 1 &amp; 0
 \end{bmatrix}
-$$</p>
+\end{split}\]</div>
 <p>Real filters can look like this. They may look somewhat random at first glance, but we can see that clear structure being learned in most kernels. For example, filters 3 and 4 seem to be learning diagonal edges in opposite directions, and others capture round edges or enclosed spaces:</p>
 <p><img alt="kernels" src="../_images/kernels.png" /></p>
 <p>However, <strong>it is important to note that we DON’T need to decide the filters</strong> to use. We can simply feed a randomly generated filter, and it is the job of CNN to learn these filters. These learned filters will learn what features are most efficient for the classification process.</p>
@@ -623,7 +629,7 @@ $$</p>
 <p><strong>How do we know how many output channels to use?</strong><br />
 The answer is we don’t know… we just try and see what works. More filters allow the network to look at more patterns.</p>
 <p><strong>What should be the filter size?</strong><br />
-If we use a 3 x 3 filter, each pixel gets 8 neighboring information. On the other hand, if we use a big filter like 9 x 9, then we get 80 neighboring information. In research and industry, the typical filter sizes are $3 \times 3$ or $5 \times 5$.</p>
+If we use a 3 x 3 filter, each pixel gets 8 neighboring information. On the other hand, if we use a big filter like 9 x 9, then we get 80 neighboring information. In research and industry, the typical filter sizes are <span class="math notranslate nohighlight">\(3 \times 3\)</span> or <span class="math notranslate nohighlight">\(5 \times 5\)</span>.</p>
 </section>
 <section id="b-padding">
 <h2><strong>B. Padding</strong><a class="headerlink" href="#b-padding" title="Link to this heading">#</a></h2>
@@ -650,20 +656,22 @@ If we use a 3 x 3 filter, each pixel gets 8 neighboring information. On the othe
 <p>The convoluted image may look like this (nothing related with the above matrix though):</p>
 <p><img alt="img" src="../_images/convimages.png" /></p>
 <p>The formula to be used to measure the padding value to get the spatial size of the input and output volume to be the same with stride 1 is:</p>
-<p>$$
-\frac{K-1}{2}
-$$</p>
-<p>where $K$ is the filter size. This means that if our image is size $24 \times 24$, and the filter size is $3 \times 3$, then our $K$ has size 3 so the padding should be $\frac{(3-1)}{2} = 1$, then we need to add <strong>a border of one pixel valued 0 around the outside of the image</strong>, which would result in the input image of size $26 \times 26$.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} 
+\\frac{K-1}{2} 
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(K\)</span> is the filter size. This means that if our image is size <span class="math notranslate nohighlight">\(24 \\times 24\)</span>, and the filter size is <span class="math notranslate nohighlight">\(3 \\times 3\)</span>, then our <span class="math notranslate nohighlight">\(K\)</span> has size 3 so the padding should be <span class="math notranslate nohighlight">\(\\frac{(3-1)}{2} = 1\)</span>, then we need to add <strong>a border of one pixel valued 0 around the outside of the image</strong>, which would result in the input image of size <span class="math notranslate nohighlight">\(26 \\times 26\)</span>.</p>
 </section>
 <section id="d-shape">
 <h2><strong>D. Shape</strong><a class="headerlink" href="#d-shape" title="Link to this heading">#</a></h2>
 <ol class="arabic simple" start="4">
-<li><p><strong>What would be the shape of the output matrix?</strong> The output shape (denote as $O$) depends on the stride (denote as $S$), padding (denote as $P$), filter size (denote as $F$), as well as the input width and height (denote as $I$). $O$ can be calculated with the formula as follows:</p></li>
+<li><p><strong>What would be the shape of the output matrix?</strong> The output shape (denote as <span class="math notranslate nohighlight">\(O\)</span>) depends on the stride (denote as <span class="math notranslate nohighlight">\(S\)</span>), padding (denote as <span class="math notranslate nohighlight">\(P\)</span>), filter size (denote as <span class="math notranslate nohighlight">\(F\)</span>), as well as the input width and height (denote as <span class="math notranslate nohighlight">\(I\)</span>). <span class="math notranslate nohighlight">\(O\)</span> can be calculated with the formula as follows:</p></li>
 </ol>
-<p>$$
-O = \frac{W-F+2P}{S} + 1
-$$</p>
-<p>In this case (code below), if our $W$ is 28, $F$ is 5, $P$ is 2, and $S$ is 1 then the width/height is 28.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} 
+O = \\frac{W-F+2P}{S} + 1 
+\end{split}\]</div>
+<p>In this case (code below), if our <span class="math notranslate nohighlight">\(W\)</span> is 28, <span class="math notranslate nohighlight">\(F\)</span> is 5, <span class="math notranslate nohighlight">\(P\)</span> is 2, and <span class="math notranslate nohighlight">\(S\)</span> is 1 then the width/height is 28.</p>
 <p>In conclusion,</p>
 <ul class="simple">
 <li><p>The input will have a 4D shape of <strong>(batch size, input channels, input height, input width)</strong>.</p></li>
@@ -696,7 +704,7 @@ $$</p>
 <section id="dropout-layer">
 <h2><strong>4. Dropout Layer</strong><a class="headerlink" href="#dropout-layer" title="Link to this heading">#</a></h2>
 <p>This is a layer of arbitrarily removing some values in your data. By randomly removing data in each iteration, you make the neural network more robust against overfitting, because it needs to learn to fight with incomplete data.</p>
-<p>For example, say we have a vector of $x = \{1, 2, 3, 4, 5\}$. Let’s set $p=0.2$ which means 20% of data will be turned to 0. In training mode, $x_\text{train} = \{1, 0, 3, 4, 5\}$; do not confuse why I turn off 2 and not others, I just turn 20% off randomly. In evaluation mode, we turn off dropout, but to make sure the distribution remains similar, we multiply the values by $1 - 0.2 = 0.8$, which becomes $x_\text{inference} = \{0.8, 1.6, 2.4, 3.2, 4.0\}$.</p>
+<p>For example, say we have a vector of <span class="math notranslate nohighlight">\(x = \\{1, 2, 3, 4, 5\\}\)</span>. Let’s set <span class="math notranslate nohighlight">\(p=0.2\)</span> which means 20% of data will be turned to 0. In training mode, <span class="math notranslate nohighlight">\(x\_\\text{train} = \\{1, 0, 3, 4, 5\\}\)</span>; do not confuse why I turn off 2 and not others, I just turn 20% off randomly. In evaluation mode, we turn off dropout, but to make sure the distribution remains similar, we multiply the values by <span class="math notranslate nohighlight">\(1 - 0.2 = 0.8\)</span>, which becomes <span class="math notranslate nohighlight">\(x\_\\text{inference} = \\{0.8, 1.6, 2.4, 3.2, 4.0\\}\)</span>.</p>
 </section>
 <section id="id1">
 <h2>Group Activty<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
