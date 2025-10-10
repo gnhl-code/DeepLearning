@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>&lt;no title&gt; &#8212; Genny&#39;s Jupyter Book</title>
+    <title>Laboratory Task 5 &#8212; Genny&#39;s Jupyter Book</title>
   
   
   
@@ -179,16 +179,17 @@
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../lectures/lecture1.html">Lesson 1: Foundational Concept of Deep Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../lecturetasks/lecturetask1.html">Lecture Task 1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Laboratory1.html">Laboratory Task 1</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../lectures/lecture2.html">Lesson 2: Understanding Deep Learnin</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../lectures/lecture2.html">Lesson 2: Understanding Deep Learnin</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="Laboratory2.html">Laboratory Task 2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Laboratory3.html">Laboratory Task 3</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Laboratory4.html">Laboratory Task 4</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Laboratory Task 5</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../lectures/lecture3.html">PyTorch Tensor Objects Attributes and Methods</a></li>
@@ -367,9 +368,7 @@ document.write(`
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</button>
+
 </div></div>
       
     </div>
@@ -380,19 +379,11 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>Laboratory Task 5</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -402,7 +393,26 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <p>Genheylou Felisilda - DS4A</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="laboratory-task-5">
+<h1>Laboratory Task 5<a class="headerlink" href="#laboratory-task-5" title="Link to this heading">#</a></h1>
+<p>Genheylou Felisilda - DS4A</p>
+<p>Instructions: Pytorch Excercises</p>
+<ol class="arabic simple">
+<li><p>Perform Standard Imports</p></li>
+<li><p>Create a function called <code class="docutils literal notranslate"><span class="pre">set_seed()</span></code> that accepts <code class="docutils literal notranslate"><span class="pre">seed:</span> <span class="pre">int</span></code> as a parameter, this function must return nothing but just set the seed to a certain value</p></li>
+<li><p>Create a NumPy array called “arr” that contains 6 random integers between 0 (inclusive) and 5 (exclusive), call the <code class="docutils literal notranslate"><span class="pre">set_seed()</span></code> function and use <code class="docutils literal notranslate"><span class="pre">42</span></code> as the seed parameter.</p></li>
+<li><p>Create a tensor “x” from the array above</p></li>
+<li><p>Change the dtype of x from <code class="docutils literal notranslate"><span class="pre">int32</span></code> to <code class="docutils literal notranslate"><span class="pre">int64</span></code></p></li>
+<li><p>Reshape <code class="docutils literal notranslate"><span class="pre">x</span></code> into a 3x2 tensor<br />
+There are several ways to do this.</p></li>
+<li><p>Return the right-hand column of tensor `x</p></li>
+<li><p>Without changing x, return a tensor of square values of `x<br />
+There are several ways to do this.</p></li>
+<li><p>Create a tensor <code class="docutils literal notranslate"><span class="pre">y</span></code> with the same number of elements as <code class="docutils literal notranslate"><span class="pre">x</span></code>, that can be matrix-multiplied with `x<br />
+Use PyTorch directly (not NumPy) to create a tensor of random integers between 0 (inclusive) and 5 (exclusive). Use 42 as seed.<br />
+Think about what shape it should have to permit matrix multiplication.</p></li>
+<li><p>Find the matrix product of <code class="docutils literal notranslate"><span class="pre">x</span></code> and `y</p></li>
+</ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#1 Perform Standard Imports</span>
@@ -437,7 +447,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([3, 1, 0, 0, 4, 3], dtype=int32)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([4, 2, 3, 1, 2, 0], dtype=int32)
 </pre></div>
 </div>
 </div>
@@ -452,7 +462,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([3, 1, 0, 0, 4, 3], dtype=torch.int32)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([4, 2, 3, 1, 2, 0], dtype=torch.int32)
 </pre></div>
 </div>
 </div>
@@ -484,9 +494,9 @@ New: torch.int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[3, 1],
-        [0, 0],
-        [4, 3]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[4, 2],
+        [3, 1],
+        [2, 0]])
 </pre></div>
 </div>
 </div>
@@ -501,9 +511,9 @@ New: torch.int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[1],
-        [0],
-        [3]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[2],
+        [1],
+        [0]])
 </pre></div>
 </div>
 </div>
@@ -518,9 +528,9 @@ New: torch.int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[ 9,  1],
-        [ 0,  0],
-        [16,  9]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[16,  4],
+        [ 9,  1],
+        [ 4,  0]])
 </pre></div>
 </div>
 </div>
@@ -558,6 +568,7 @@ New: torch.int64
 </div>
 </div>
 </div>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -613,21 +624,6 @@ New: torch.int64
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-  </nav></div>
-
-</div></div>
               
             
           </div>
