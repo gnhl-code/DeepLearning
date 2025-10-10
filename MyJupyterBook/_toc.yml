@@ -16,7 +16,7 @@ parts:
           - file: laboratories/Laboratory2
           - file: laboratories/Laboratory3
           - file: laboratories/Laboratory4
-          - file: lecturetasks/Laboratory5
+          - file: laboratories/Laboratory5
       - file: lectures/lecture3
       - file: lectures/lecture4
       - file: lectures/lecture5
